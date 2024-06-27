@@ -21,7 +21,9 @@ export type BlogDetailProps = {
 export default async function Page({ params }: { params: { id: number } }) {
   console.log(params);
   const response = await fetch(
-    `${process.env.NEXT_APOLLO_CLIENT_URL}${encodeURIComponent(pdpQuery)}`,
+    `${process.env.NEXT_APOLLO_CLIENT_URL}/graphql?query=${encodeURIComponent(
+      pdpQuery
+    )}`,
     {
       next: { revalidate: 10 },
     }
@@ -286,12 +288,12 @@ export default async function Page({ params }: { params: { id: number } }) {
         </div>
         <UI.Spacer size={'lg'} />
         <UI.Spacer size={'lg'} />
-        <UI.Testimonials items={testimonials} />
+        {testimonials.length > 0 && <UI.Testimonials items={testimonials} />}
         <UI.Spacer size={'lg'} />
       </div>
       <div className="bg">
         <UI.Spacer size={'lg'} />
-        <UI.Faq items={faqs} />
+        {faqs.length > 0 && <UI.Faq items={faqs} />}
       </div>
       <UI.Spacer size={'lg'} />
       <UI.RelatedLinks />
