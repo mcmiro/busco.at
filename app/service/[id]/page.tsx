@@ -34,6 +34,7 @@ export type BlogDetailProps = {
 export default async function Page({ params }: { params: { id: number } }) {
   //const { handleGetSinglePost } = usePosts();
   //const post = await handleGetSinglePost(params.id);
+  console.log(params);
 
   return (
     <div>
