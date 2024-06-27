@@ -6,10 +6,9 @@ import Shape from '@/public/elements/shape.svg';
 import Way from '@/public/elements/way.jpg';
 import Phone from '@/public/elements/phone.jpg';
 import Image from 'next/image';
-import testimonials from '@/mocks/testimonials';
-import faqs from '@/mocks/faqs';
 import posts from '@/mocks/posts';
 import { PostType } from '@/types/Post';
+import { pdpQuery } from '@/lib/queries';
 
 //const Comments = dynamic(() => import('@/components/organisms/comments'), {
 //  ssr: false,
@@ -19,22 +18,26 @@ export type BlogDetailProps = {
   id: string;
 };
 
-//export async function generateStaticParams() {
-//const supabase = createClient();
-//const { data, error } = await supabase.from('posts').select(`id`);
-//if (!data || error) {
-//  return notFound();
-//}
-//const posts = data.map((post: BlogDetailProps) => ({
-//  id: post.id.toString(),
-//}));
-//return posts;
-//}
-
 export default async function Page({ params }: { params: { id: number } }) {
-  //const { handleGetSinglePost } = usePosts();
-  //const post = await handleGetSinglePost(params.id);
-  console.log(params);
+  const response = await fetch(
+    `${process.env.NEXT_APOLLO_CLIENT_URL}${encodeURIComponent(pdpQuery)}`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
+
+  const { data } = await response.json();
+
+  const faqs = data?.faqs?.data.map(
+    (faq: { attributes: { question: string; answer: string } }) =>
+      faq.attributes
+  );
+
+  const testimonials = data?.testimonials?.data.map(
+    (testimonial: {
+      attributes: { content: string; author: string; company: string };
+    }) => testimonial.attributes
+  );
 
   return (
     <div>
