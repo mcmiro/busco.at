@@ -19,6 +19,7 @@ export type BlogDetailProps = {
 };
 
 export default async function Page({ params }: { params: { id: number } }) {
+  console.log(params);
   const response = await fetch(
     `${process.env.NEXT_APOLLO_CLIENT_URL}${encodeURIComponent(pdpQuery)}`,
     {
