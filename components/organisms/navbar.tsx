@@ -3,20 +3,11 @@ import { NavItemType } from '@/types/NavItem';
 import navigation from '@/constants/navigation';
 import Link from 'next/link';
 import { UI } from '../index';
-import { useTheme } from 'next-themes';
-import useThemeToggler from '@/hooks/use-theme-toggler';
-import { useEffect } from 'react';
 import useScroll from '@/hooks/use-scroll';
 //import MenuMob from './menu-mob';
 
 export default function Navbar() {
-  const { setTheme } = useTheme();
   const { scrolled } = useScroll();
-  const { currentTheme } = useThemeToggler();
-
-  useEffect(() => {
-    setTheme(currentTheme);
-  }, [currentTheme]);
 
   return (
     <div className="fixed left-[50%] translate-x-[-50%] h-24 w-full px-6 z-40">
