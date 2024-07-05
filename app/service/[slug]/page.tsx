@@ -1,6 +1,6 @@
 //import dynamic from 'next/dynamic';
 //import ServiceDetailView from '@/components/molecules/service-detail-view';
-//import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { UI } from '@/components/index';
 import Shape from '@/public/elements/shape.svg';
 import Way from '@/public/elements/way.jpg';
@@ -9,6 +9,7 @@ import Image from 'next/image';
 import posts from '@/mocks/posts';
 import { PostType } from '@/types/Post';
 import { pdpQuery } from '@/lib/queries';
+import { pdpQueryParams } from '@/lib/strapi-queries';
 
 //const Comments = dynamic(() => import('@/components/organisms/comments'), {
 //  ssr: false,
@@ -18,8 +19,21 @@ export type BlogDetailProps = {
   id: string;
 };
 
-export default async function Page({ params }: { params: { id: number } }) {
-  console.log(params);
+export async function generateStaticParams() {
+  const pages = await fetch(`${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps`, {
+    next: { revalidate: 10 },
+  });
+
+  const urls = await pages.json();
+  const slugs = urls.data.map(
+    (url: { attributes: { slug: string } }) => url.attributes.slug
+  );
+
+  return slugs;
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  // GraphQL API Call
   const response = await fetch(
     `${process.env.NEXT_APOLLO_CLIENT_URL}/graphql?query=${encodeURIComponent(
       pdpQuery
@@ -28,9 +42,9 @@ export default async function Page({ params }: { params: { id: number } }) {
       next: { revalidate: 10 },
     }
   );
-
   const { data } = await response.json();
 
+  // extract graphql objects to sections
   const faqs = data?.faqs?.data.map(
     (faq: { attributes: { question: string; answer: string } }) =>
       faq.attributes
@@ -42,85 +56,38 @@ export default async function Page({ params }: { params: { id: number } }) {
     }) => testimonial.attributes
   );
 
+  // PDP separated API Call (because graphql strapi plugin has a bug for filters: https://github.com/strapi/strapi/issues/19972)
+  const urlParams = new URLSearchParams(pdpQueryParams);
+  urlParams.append('filters[slug][$eq]', params.slug);
+
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps?${urlParams}`;
+  const pdpData = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
+
+  const pageData = await pdpData.json();
+  // redirect to 404 if no data
+  if (!pageData.data[0]) {
+    return notFound();
+  }
+
+  const page = pageData.data[0].attributes;
+
   return (
     <div>
+      {page.heroSection && <UI.Header content={page.heroSection} />}
       <div className="container mx-auto">
         <UI.Spacer size={'lg'} />
         <div>
           <Image src={Shape} width={64} height={34} alt="Shape Busco" />
         </div>
-        <div className="grid grid-cols-2 gap-8">
-          <div className="mt-6">
-            {/*<ServiceDetailView post={post} />*/}
-            <UI.Typography type="h2" size={'h3'} weight={'bold'}>
-              Bus mit Fahrer mieten: mit Busco so einfach wie noch nie.
-            </UI.Typography>
-          </div>
-          <div>
-            <UI.Typography size={'h4'} textColor={'gray'} className="mt-6">
-              Lorem gipsym sit gladan. Lorem gipsym sit gladan. Lorem gipsym sit
-              gladan. Lorem gipsym sit gladan. Lorem gipsym sit gladan. Lorem
-              gipsym sit gladan. Lorem gipsym sit gladan. Lorem gipsym sit
-              gladan.
-            </UI.Typography>
-          </div>
-        </div>
+        {page?.sectionOne && <UI.HeadlineContent content={page.sectionOne} />}
         <UI.Spacer size={'lg'} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-xl px-10 py-12 text-center">
-          <div>
-            <UI.Typography size={'h4'} weight={'bold'}>
-              Ziel & Datum eingeben
-            </UI.Typography>
-            <UI.Typography size={'h5'} textColor={'gray'} className="mt-4">
-              Egal ob Mini-Van, Minibus oder Reisebus. In jedem Fahrzeug sorgen
-              wir für höchste Hygienestandards
-            </UI.Typography>
-            <UI.Typography size={'h3'} weight={'bold'} className="mt-4">
-              1.
-            </UI.Typography>
-          </div>
-          <div className="border-x border-gray-300 px-2">
-            <UI.Typography size={'h4'} weight={'bold'}>
-              Preis berechnen
-            </UI.Typography>
-            <UI.Typography size={'h5'} textColor={'gray'} className="mt-4">
-              Egal ob Mini-Van, Minibus oder Reisebus. In jedem Fahrzeug sorgen
-              wir für höchste Hygienestandards
-            </UI.Typography>
-            <UI.Typography size={'h3'} weight={'bold'} className="mt-4">
-              2.
-            </UI.Typography>
-          </div>
-          <div>
-            <UI.Typography size={'h4'} weight={'bold'}>
-              Unverbindlich Angebot anfordern
-            </UI.Typography>
-            <UI.Typography size={'h5'} textColor={'gray'} className="mt-4">
-              Egal ob Mini-Van, Minibus oder Reisebus. In jedem Fahrzeug sorgen
-              wir für höchste Hygienestandards
-            </UI.Typography>
-            <UI.Typography size={'h3'} weight={'bold'} className="mt-4">
-              3.
-            </UI.Typography>
-          </div>
-        </div>
+        {page?.enumerationOne.length && (
+          <UI.Enumeration content={page.enumerationOne} />
+        )}
         <UI.Spacer size={'lg'} />
-        <div className="grid grid-cols-2 gap-8">
-          <div className="mt-6">
-            <UI.Typography type="h2" size={'h3'} weight={'bold'}>
-              Beliebte Ziele <br></br>
-              Tagesfahrten Kunden.
-            </UI.Typography>
-          </div>
-          <div>
-            <UI.Typography size={'h4'} textColor={'gray'} className="mt-6">
-              Mieten Sie einen Reisebus mit Fahrer für verschiedene Gruppen.
-              Bequem, transparent und unkompliziert. Mieten Sie einen Reisebus
-              mit Fahrer für verschiedene Gruppen. Bequem, transparent und
-              unkompliziert.
-            </UI.Typography>
-          </div>
-        </div>
+        {page?.sectionTwo && <UI.HeadlineContent content={page.sectionTwo} />}
         {/* Service Card START */}
         <UI.Spacer size={'lg'} />
         <div className="flex gap-8">

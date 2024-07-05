@@ -1,12 +1,17 @@
 import Navbar from './navbar';
 import { UI } from '../index';
+import { HeroHeaderProps } from '@/types/HeroHeader';
 
-export default function Header() {
+export type HeaderProps = {
+  content: HeroHeaderProps;
+};
+
+export default function Header({ content }: HeaderProps) {
   return (
     <header className="h-screen">
       <Navbar />
       <div className="pt-24">
-        <UI.HeroHeader />
+        <UI.HeroHeader content={content} />
       </div>
     </header>
   );

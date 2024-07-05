@@ -23,8 +23,7 @@ export default function RootLayout({
   return (
     <html lang="de" suppressHydrationWarning>
       <body className={urbanist.className}>
-        <UI.Header />
-        <main className={`py-16 px-0`}>{children}</main>
+        <main className={`px-0`}>{children}</main>
         <UI.Footer />
       </body>
     </html>

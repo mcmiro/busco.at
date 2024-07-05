@@ -56,8 +56,10 @@ import TalkTo from './molecules/scroll-to';
 
 //Organisms
 import { Faq } from './organisms/faq';
+import Enumeration from './organisms/enumeration';
 import Footer from '@/components/organisms/footer';
 import Header from '@/components/organisms/header';
+import HeadlineContent from './organisms/headline-content';
 import List from './organisms/list';
 import Navbar from '@/components/organisms/navbar';
 import Rating from './organisms/rating';
@@ -114,9 +116,11 @@ export const UI = {
   TalkTo,
 
   // Organisms
+  Enumeration,
   Faq,
   Footer,
   Header,
+  HeadlineContent,
   ListItem,
   Navbar,
   PriceTable,
