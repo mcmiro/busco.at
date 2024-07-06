@@ -8,9 +8,10 @@ const typographyVariants = cva('', {
       h1: 'text-4xl md:text-[48px] lg:text-[64px] leading-[1.125]',
       h2: 'text-3xl md:text-[40px] lg:text-[56px] leading-[1.125]',
       h3: 'text-2xl md:text-[36px] leading-[1.125]',
-      h4: 'text-xl md:text-[24px] leading-[1.25]',
-      h5: 'text-lg leading-[1.25] tracking-wide',
+      h4: 'text-xl md:text-[24px] leading-[1.5]',
+      h5: 'text-lg leading-[1.5] tracking-wide',
       md: 'text-md tracking-wider',
+      sm: 'text-sm tracking-wider',
     },
     weight: {
       bold: 'font-bold',
