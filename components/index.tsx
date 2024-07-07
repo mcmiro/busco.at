@@ -52,6 +52,7 @@ import HeroHeader from './molecules/hero-header';
 import ListItem from './molecules/list-item';
 import RelatedLinks from './molecules/related-links';
 import ServiceCard from '@/components/molecules/service-card';
+import Separator from './molecules/separator';
 import TalkTo from './molecules/scroll-to';
 
 //Organisms
@@ -113,6 +114,7 @@ export const UI = {
   List,
   RelatedLinks,
   ServiceCard,
+  Separator,
   TalkTo,
 
   // Organisms

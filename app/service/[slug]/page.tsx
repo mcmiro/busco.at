@@ -6,8 +6,6 @@ import posts from '@/mocks/posts';
 import { PostType } from '@/types/Post';
 import { pdpQuery } from '@/lib/queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 export async function generateStaticParams() {
   const pages = await fetch(`${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps`, {
@@ -63,213 +61,138 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const page = pageData.data[0].attributes;
 
   return (
-    <div>
+    <>
       {page.heroSection && <UI.Header content={page.heroSection} />}
-      <div className="container mx-auto">
-        <UI.Spacer size={'lg'} />
-        <div>
-          <Image src={Shape} width={64} height={34} alt="Shape Busco" />
-        </div>
-        {!!page?.sectionOne && <UI.HeadlineContent content={page.sectionOne} />}
-        <UI.Spacer size={'lg'} />
-        {page?.enumerationOne.length > 0 && (
-          <UI.Enumeration content={page.enumerationOne} />
-        )}
-        <UI.Spacer size={'lg'} />
-        {!!page?.sectionTwo && <UI.HeadlineContent content={page.sectionTwo} />}
-        <UI.Spacer size={'lg'} />
-
-        {/* Service Card START */}
-        <UI.Spacer size={'lg'} />
-        {!!page?.popularDestinations && (
-          <div className="text-center">
-            <UI.Typography
-              size={'h4'}
-              weight={'bold'}
-              className="text-secondary"
-            >
-              {page?.popularDestinations.content}
-            </UI.Typography>
-            <UI.Typography size={'h3'} weight={'bold'}>
-              {page?.popularDestinations.headline}
-            </UI.Typography>
-          </div>
-        )}
-        <UI.Spacer size={'md'} />
-        <div className="flex gap-8">
-          {posts.map((post: PostType, index: number) => (
-            <UI.ServiceCard key={index} post={post} />
-          ))}
-        </div>
-        <UI.Spacer size={'lg'} />
-        {/* Service Card END */}
-        <UI.Spacer size={'lg'} />
-      </div>
-      {page?.spliterSectionOne && (
-        <div className="relative">
-          <Image
-            src={page?.spliterSectionOne?.image.data.attributes.url}
-            alt="busco Ausflug"
-            layout="cover"
-            width={2000}
-            height={1000}
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-center">
-            <UI.Typography size={'h1'} textColor={'white'} weight={'bold'}>
-              {page?.spliterSectionOne?.headline}
-            </UI.Typography>
-            <UI.Typography
-              size={'h4'}
-              textColor={'white'}
-              className="mt-6 pb-8"
-            >
-              {page?.spliterSectionOne?.content}
-            </UI.Typography>
-
-            <Link
-              href={page?.spliterSectionOne?.cta.url}
-              className="inline-flex flex-row gap-4 px-12 py-4 rounded-lg bg-black text-white font-semibold tracking-wider"
-            >
-              {page?.spliterSectionOne?.cta.title}
-              <ArrowRight />
-            </Link>
-          </div>
-        </div>
-      )}
-      <UI.Spacer size={'lg'} />
-      <div className="container mx-auto">
-        <div>
-          <Image src={Shape} width={64} height={34} alt="Shape Busco" />
-        </div>
-        {!!page?.sectionThree && (
-          <UI.HeadlineContent content={page.sectionThree} />
-        )}
-        <UI.Spacer size={'lg'} />
+      <main>
         <div className="container mx-auto">
-          {page?.enumerationTwo.length > 0 && (
-            <UI.Enumeration content={page.enumerationTwo} />
+          {!!page?.sectionOne && (
+            <>
+              <UI.Spacer size={'lg'} />
+              <div>
+                <Image src={Shape} width={64} height={34} alt="Shape Busco" />
+              </div>
+              <UI.HeadlineContent content={page.sectionOne} />
+              <UI.Spacer size={'lg'} />
+            </>
+          )}
+          {page?.enumerationOne.length > 0 && (
+            <>
+              <UI.Enumeration content={page.enumerationOne} />
+              <UI.Spacer size={'lg'} />
+            </>
+          )}
+          {!!page?.sectionTwo && (
+            <UI.HeadlineContent content={page.sectionTwo} />
           )}
           <UI.Spacer size={'lg'} />
-        </div>
-      </div>
-      <div className="bg-white">
-        <UI.Spacer size={'lg'} />
-        <div className="container">
-          <UI.PriceTable content={page.priceSection} />
-        </div>
-        <UI.Spacer size={'lg'} />
-      </div>
-      {page?.spliterSectionTwo && (
-        <div className="relative">
-          <Image
-            src={page?.spliterSectionTwo?.image.data.attributes.url}
-            alt="busco Ausflug"
-            layout="cover"
-            width={2000}
-            height={1000}
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-center">
-            <UI.Typography size={'h1'} textColor={'white'} weight={'bold'}>
-              {page?.spliterSectionTwo?.headline}
-            </UI.Typography>
-            <UI.Typography
-              size={'h4'}
-              textColor={'white'}
-              className="mt-6 pb-8"
-            >
-              {page?.spliterSectionTwo?.content}
-            </UI.Typography>
-
-            <Link
-              href={page?.spliterSectionTwo?.cta.url}
-              className="inline-flex flex-row gap-4 px-12 py-4 rounded-lg bg-black text-white font-semibold tracking-wider"
-            >
-              {page?.spliterSectionTwo?.cta.title}
-              <ArrowRight />
-            </Link>
-          </div>
-        </div>
-      )}
-      <UI.Spacer size={'lg'} />
-      <div className="container mx-auto">
-        {!!page?.sectionFour && (
-          <UI.HeadlineContent content={page.sectionFour} />
-        )}
-        <UI.Spacer size={'lg'} />
-        {!!page?.dailyRoutes && (
-          <div className="text-center">
-            <UI.Typography
-              size={'h4'}
-              weight={'bold'}
-              className="text-secondary"
-            >
-              {page?.dailyRoutes.subline}
-            </UI.Typography>
-            <UI.Typography size={'h3'} weight={'bold'}>
-              {page?.dailyRoutes.headline}
-            </UI.Typography>
-            <UI.Typography
-              size={'h4'}
-              textColor={'gray'}
-              className="mt-6 md:max-w-[60%] mx-auto text-center"
-            >
-              {page?.dailyRoutes.content}
-            </UI.Typography>
-          </div>
-        )}
-        <UI.Spacer size={'lg'} />
-        {/* Service Card START */}
-        <div className="container mx-auto">
+          <UI.Spacer size={'lg'} />
+          {!!page?.popularDestinations && (
+            <div className="text-center">
+              <UI.Typography
+                size={'h4'}
+                weight={'bold'}
+                className="text-secondary"
+              >
+                {page?.popularDestinations.content}
+              </UI.Typography>
+              <UI.Typography size={'h3'} weight={'bold'}>
+                {page?.popularDestinations.headline}
+              </UI.Typography>
+            </div>
+          )}
+          <UI.Spacer size={'md'} />
           <div className="flex gap-8">
             {posts.map((post: PostType, index: number) => (
               <UI.ServiceCard key={index} post={post} />
             ))}
           </div>
+          <UI.Spacer size={'lg'} />
+          <UI.Spacer size={'lg'} />
         </div>
-      </div>
-      <UI.Spacer size={'lg'} />
-      {/* Service Card END */}
-      {page?.spliterThree && (
-        <div className="relative">
-          <Image
-            src={page?.spliterThree?.image.data.attributes.url}
-            alt="busco Ausflug"
-            layout="cover"
-            width={2000}
-            height={1000}
-          />
-          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-center">
-            <UI.Typography size={'h1'} textColor={'white'} weight={'bold'}>
-              {page?.spliterThree?.headline}
-            </UI.Typography>
-            <UI.Typography
-              size={'h4'}
-              textColor={'white'}
-              className="mt-6 pb-8"
-            >
-              {page?.spliterThree?.content}
-            </UI.Typography>
-
-            <Link
-              href={page?.spliterThree?.cta.url}
-              className="inline-flex flex-row gap-4 px-12 py-4 rounded-lg bg-black text-white font-semibold tracking-wider"
-            >
-              {page?.spliterThree?.cta.title}
-              <ArrowRight />
-            </Link>
+        {page?.separatorSectionOne && (
+          <UI.Separator content={page.separatorSectionOne} />
+        )}
+        <div className="container mx-auto">
+          {!!page?.sectionThree && (
+            <>
+              <UI.Spacer size={'lg'} />
+              <div>
+                <Image src={Shape} width={64} height={34} alt="Logo Busco" />
+              </div>
+              <UI.HeadlineContent content={page.sectionThree} />
+              <UI.Spacer size={'lg'} />
+            </>
+          )}
+          <div className="container mx-auto">
+            {page?.enumerationTwo.length > 0 && (
+              <UI.Enumeration content={page.enumerationTwo} />
+            )}
+            <UI.Spacer size={'lg'} />
           </div>
         </div>
-      )}
-      <UI.Spacer size={'lg'} />
-      <div className="container mx-auto">
-        {testimonials.length > 0 && <UI.Testimonials items={testimonials} />}
-      </div>
-      <div className="bg">
+        <div className="bg-white">
+          <UI.Spacer size={'lg'} />
+          <div className="container">
+            <UI.PriceTable content={page.priceSection} />
+          </div>
+          <UI.Spacer size={'lg'} />
+        </div>
+        {page?.separatorSectionTwo && (
+          <UI.Separator content={page.separatorSectionTwo} />
+        )}
         <UI.Spacer size={'lg'} />
-        {faqs.length > 0 && <UI.Faq items={faqs} />}
-      </div>
-      <UI.Spacer size={'lg'} />
-      <UI.RelatedLinks />
-    </div>
+        <div className="container mx-auto">
+          {!!page?.sectionFour && (
+            <UI.HeadlineContent content={page.sectionFour} />
+          )}
+          <UI.Spacer size={'lg'} />
+          {!!page?.dailyRoutes && (
+            <div className="text-center">
+              <UI.Typography
+                size={'h4'}
+                weight={'bold'}
+                className="text-secondary"
+              >
+                {page?.dailyRoutes.subline}
+              </UI.Typography>
+              <UI.Typography size={'h3'} weight={'bold'}>
+                {page?.dailyRoutes.headline}
+              </UI.Typography>
+              <UI.Typography
+                size={'h4'}
+                textColor={'gray'}
+                className="mt-6 md:max-w-[60%] mx-auto text-center"
+              >
+                {page?.dailyRoutes.content}
+              </UI.Typography>
+              <UI.Spacer size={'lg'} />
+            </div>
+          )}
+          {/* Service Card START */}
+          <div className="container mx-auto">
+            <div className="flex gap-8">
+              {posts.map((post: PostType, index: number) => (
+                <UI.ServiceCard key={index} post={post} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <UI.Spacer size={'lg'} />
+        {/* Service Card END */}
+        {page?.separatorSectionThree && (
+          <UI.Separator content={page.separatorSectionThree} />
+        )}
+        <UI.Spacer size={'lg'} />
+        <div className="container mx-auto">
+          {testimonials.length > 0 && <UI.Testimonials items={testimonials} />}
+        </div>
+        <div className="bg">
+          <UI.Spacer size={'lg'} />
+          {faqs.length > 0 && <UI.Faq items={faqs} />}
+        </div>
+        <UI.Spacer size={'lg'} />
+        {!!page.otherBuses && <UI.RelatedLinks content={page.otherBuses} />}
+      </main>
+    </>
   );
 }

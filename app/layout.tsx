@@ -15,6 +15,8 @@ export const metadata = {
   canonical: new URL(defaultUrl),
 };
 
+//const isPdpPage = window.location.pathname;
+
 export default function RootLayout({
   children,
 }: {
@@ -23,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="de" suppressHydrationWarning>
       <body className={urbanist.className}>
-        <main className={`px-0`}>{children}</main>
+        {children}
         <UI.Footer />
       </body>
     </html>
