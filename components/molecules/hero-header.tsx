@@ -13,17 +13,16 @@ export type HeroProps = {
 
 function HeroHeader({ content }: HeroProps) {
   return (
-    <div className="relative py-8 md:py-16 px-4 h-full">
+    <div className="relative py-8 px-4 min-h-screen">
       <Image
         src={content.image.data.attributes.url}
         alt="busco bus"
-        layout="cover"
-        width={10000}
-        height={100}
+        layout="fill"
+        objectFit="cover"
         className="absolute top-0 left-0 z-0"
       />
-      <div className="flex md:grid-cols-2 justify-between text-white relative z-20 container mx-auto h-full">
-        <div className="flex flex-col gap-24">
+      <div className="lg:grid lg:grid-cols-2 justify-between text-white relative z-20 container mx-auto h-full md:py-16">
+        <div className="flex flex-col gap-12 lg:gap-24">
           <UI.Breadcrumbs items={breadcrumbs} />
           <div>
             <UI.Typography textColor="white" size="h4">
@@ -43,7 +42,7 @@ function HeroHeader({ content }: HeroProps) {
               ))}
             </UI.List>
           </div>
-          <div>
+          <div className="pb-8">
             <UI.Rating value={content.rating} />
           </div>
         </div>

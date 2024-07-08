@@ -36,10 +36,12 @@ export default function Navbar() {
               ))}
             </div>
             <div className={`flex items-center justify-center px-4 h-full`}>
-              <UI.Button variant={'secondary'}>Bus mieten</UI.Button>
+              <UI.Button variant={'secondary'} className="hidden lg:block">
+                Bus mieten
+              </UI.Button>
               <div className="flex md:hidden flex-col items-center justify-center focus:outline-none focus:shadow-outline cursor-pointer">
-                <div className="w-10 h-[1px] bg-black mb-3"></div>
-                <div className="w-10 h-[1px] bg-black"></div>
+                <div className="w-10 h-[3px] bg-black mb-3 rounded-full"></div>
+                <div className="w-10 h-[3px] bg-black rounded-full"></div>
               </div>
             </div>
           </nav>

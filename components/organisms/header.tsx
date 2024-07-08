@@ -8,7 +8,7 @@ export type HeaderProps = {
 
 export default function Header({ content }: HeaderProps) {
   return (
-    <header className="h-screen">
+    <header>
       <Navbar />
       <div className="pt-24">
         <UI.HeroHeader content={content} />

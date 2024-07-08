@@ -8,6 +8,17 @@ export const pdpQuery = `
 					}
 				}
 			}
+			prices {
+				data {
+					attributes {
+						vehicle
+						pricePerKm
+						pricePerHour
+						travelers
+						description
+					}
+				}
+			}
 			testimonials {
 				data {
 					attributes {

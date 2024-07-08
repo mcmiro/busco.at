@@ -12,7 +12,7 @@ export type HeadlineContentProps = {
 
 function HeadlineContent({ content }: HeadlineContentProps) {
   return (
-    <div className="grid grid-cols-2 gap-8">
+    <div className="grid md:grid-cols-2 gap-8">
       <div className="mt-6">
         <UI.Typography type="h2" size={'h3'} weight={'bold'}>
           {content.headline}

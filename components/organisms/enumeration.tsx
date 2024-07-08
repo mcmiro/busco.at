@@ -12,12 +12,12 @@ export type EnumerationProps = {
 
 function Enumeration({ content }: EnumerationProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-xl px-10 py-12 text-center">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 bg-white rounded-xl px-10 py-12 text-center">
       {content.map((enumeration: EnumerationItem, index: number) => (
         <div
           key={index}
           className={` px-4 ${
-            index + 1 === 2 ? 'border-x border-gray-300 px-6' : ''
+            index + 1 === 2 ? 'lg:border-x border-gray-300 px-6' : ''
           }`}
         >
           <UI.Typography size={'h4'} weight={'bold'}>

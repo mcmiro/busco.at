@@ -1,5 +1,4 @@
 import { UI } from '../index';
-import prices from '@/constants/prices';
 import { PriceItemType } from '@/types/PriceItem';
 import { LifeBuoy } from 'lucide-react';
 
@@ -11,10 +10,11 @@ export type PriceTableContent = {
 
 export type PriceTableProps = {
   content: PriceTableContent;
-  prices?: PriceItemType[];
+  prices: { attributes: PriceItemType }[];
 };
 
-export function PriceTable({ content }: PriceTableProps) {
+export function PriceTable({ content, prices }: PriceTableProps) {
+  console.log('prices', prices);
   return (
     <div>
       {!!content && (
@@ -54,13 +54,16 @@ export function PriceTable({ content }: PriceTableProps) {
         </UI.TableHeader>
         <UI.TableBody>
           {prices.map((price) => (
-            <UI.TableRow key={price.vehicle}>
+            <UI.TableRow key={price.attributes.vehicle}>
               <UI.TableCell className="font-medium">
-                {price.vehicle}
+                {price.attributes.vehicle}
               </UI.TableCell>
-              <UI.TableCell>{price.persons}</UI.TableCell>
+              <UI.TableCell>
+                Max. {price.attributes.travelers} Personen
+              </UI.TableCell>
               <UI.TableCell className="text-right">
-                {price.priceHour}
+                EUR {price.attributes.pricePerHour.toString().replace('.', ',')}
+                ,-
               </UI.TableCell>
             </UI.TableRow>
           ))}
@@ -70,10 +73,10 @@ export function PriceTable({ content }: PriceTableProps) {
         <LifeBuoy className="text-indigo-700" />
         <div className="flex justify-between items-center w-full">
           <UI.Typography size={'sm'}>
-            *Der Kilometerpreis wird angewendet, wenn die Fahrtstrecke mehr als
-            100 km in eine Richtung ist und es sich nicht um eine Rundfahrt mit
-            langen Wartezeiten handelt. Alle Preisangaben netto, ohne
-            Mehrwertsteuer.
+            *Der Stundenpreis kommt zum Einsatz, wenn die Dauer der Nutzung
+            entscheidend ist, beispielsweise bei Stadtrundfahrten mit wenig
+            Kilometern, aber mehreren Wartezeiten an jeweiligen Stops. Alle
+            Preisangaben netto, ohne Mehrwertsteuer.
           </UI.Typography>
         </div>
       </div>
@@ -91,13 +94,15 @@ export function PriceTable({ content }: PriceTableProps) {
         </UI.TableHeader>
         <UI.TableBody>
           {prices.map((price) => (
-            <UI.TableRow key={price.vehicle}>
+            <UI.TableRow key={price.attributes.vehicle}>
               <UI.TableCell className="font-medium">
-                {price.vehicle}
+                {price.attributes.vehicle}
               </UI.TableCell>
-              <UI.TableCell>{price.persons}</UI.TableCell>
+              <UI.TableCell>
+                Max. {price.attributes.travelers} Personen
+              </UI.TableCell>
               <UI.TableCell className="text-right">
-                {price.priceDistance}
+                EUR {price.attributes.pricePerKm.toString().replace('.', ',')}
               </UI.TableCell>
             </UI.TableRow>
           ))}
@@ -107,10 +112,10 @@ export function PriceTable({ content }: PriceTableProps) {
         <LifeBuoy className="text-indigo-700" />
         <div className="flex justify-between items-center w-full">
           <UI.Typography size={'sm'}>
-            *Der Stundenpreis kommt zum Einsatz, wenn die Dauer der Nutzung
-            entscheidend ist, beispielsweise bei Stadtrundfahrten mit wenig
-            Kilometern, aber mehreren Wartezeiten an jeweiligen Stops. Alle
-            Preisangaben netto, ohne Mehrwertsteuer.
+            *Der Kilometerpreis wird angewendet, wenn die Fahrtstrecke mehr als
+            100 km in eine Richtung ist und es sich nicht um eine Rundfahrt mit
+            langen Wartezeiten handelt. Alle Preisangaben netto, ohne
+            Mehrwertsteuer.
           </UI.Typography>
         </div>
       </div>

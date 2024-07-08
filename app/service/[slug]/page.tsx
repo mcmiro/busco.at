@@ -6,6 +6,29 @@ import posts from '@/mocks/posts';
 import { PostType } from '@/types/Post';
 import { pdpQuery } from '@/lib/queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const urlParams = new URLSearchParams(pdpQueryParams);
+  urlParams.append('filters[slug][$eq]', params.slug);
+
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps?populate=SEO&filters[slug][$eq]=${params.slug}`;
+  const pdpData = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
+
+  const data = await pdpData.json();
+  const metaData = data.data[0].attributes.SEO;
+
+  return {
+    title: metaData.title,
+    description: metaData.description,
+  };
+}
 
 export async function generateStaticParams() {
   const pages = await fetch(`${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps`, {
@@ -30,6 +53,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
   );
   const { data } = await response.json();
+
+  // extract graphql objects to sections
+  const prices = data?.prices.data;
 
   // extract graphql objects to sections
   const faqs = data?.faqs?.data.map(
@@ -64,7 +90,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <>
       {page.heroSection && <UI.Header content={page.heroSection} />}
       <main>
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           {!!page?.sectionOne && (
             <>
               <UI.Spacer size={'lg'} />
@@ -112,7 +138,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         {page?.separatorSectionOne && (
           <UI.Separator content={page.separatorSectionOne} />
         )}
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           {!!page?.sectionThree && (
             <>
               <UI.Spacer size={'lg'} />
@@ -132,8 +158,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="bg-white">
           <UI.Spacer size={'lg'} />
-          <div className="container">
-            <UI.PriceTable content={page.priceSection} />
+          <div className="container px-4">
+            <UI.PriceTable content={page.priceSection} prices={prices} />
           </div>
           <UI.Spacer size={'lg'} />
         </div>
@@ -141,7 +167,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <UI.Separator content={page.separatorSectionTwo} />
         )}
         <UI.Spacer size={'lg'} />
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           {!!page?.sectionFour && (
             <UI.HeadlineContent content={page.sectionFour} />
           )}
@@ -183,10 +209,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <UI.Separator content={page.separatorSectionThree} />
         )}
         <UI.Spacer size={'lg'} />
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           {testimonials.length > 0 && <UI.Testimonials items={testimonials} />}
         </div>
-        <div className="bg">
+        <div className="px-4">
           <UI.Spacer size={'lg'} />
           {faqs.length > 0 && <UI.Faq items={faqs} />}
         </div>

@@ -18,17 +18,17 @@ export type SeparatorProps = {
 
 function Separator({ content }: SeparatorProps) {
   return (
-    <div className="relative">
+    <div className="relative py-8">
       {!!content?.image.data && (
         <Image
           src={content?.image.data.attributes.url}
           alt="busco Ausflug"
-          layout="cover"
-          width={2000}
-          height={1000}
+          layout="fill"
+          objectFit="cover"
+          className="absolute top-0 left-0 z-0"
         />
       )}
-      <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-center">
+      <div className="text-center relative z-10 max-w-3xl px-4 py-8 lg:py-32 mx-auto">
         {!!content.subline && (
           <UI.Typography
             size={'h4'}

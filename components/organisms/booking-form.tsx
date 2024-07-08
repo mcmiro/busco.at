@@ -54,16 +54,16 @@ function BookingForm() {
   };
 
   return (
-    <div className="text-foreground w-[580px]">
+    <div className="text-foreground w-full">
       <>
-        <div className="bg-white rounded-t-2xl pb-4 py-6 px-10">
+        <div className="bg-white rounded-t-2xl pb-4 py-6 px-6 md:px-10">
           <UI.Typography size="h4" weight={'bold'} className="text-center">
             Preis berechnen und Angebot erstellen
           </UI.Typography>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-            <div className="flex flex-col gap-4 bg-white rounded-b-lg pb-6 px-10">
+            <div className="flex flex-col gap-4 bg-white rounded-b-lg pb-6 px-6 md:px-10">
               <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -241,32 +241,36 @@ function BookingForm() {
               )}
             </div>
             {/* Retunr Journey END */}
-            <div className="flex justify-between bg-white rounded-b-2xl rounded-t-lg pb-4 py-6 px-10 relative">
-              <Image
-                src={Dots.src}
-                className="absolute w-full top-[-1px] left-0 px-2 h-1"
-                width={100}
-                height={3}
-                alt="dots"
-              />
-              <div>
-                <UI.Typography
-                  type="h4"
-                  size={'h3'}
-                  weight={'bold'}
-                  className="whitespace-nowrap"
-                >
-                  Fixpreis: €560,-
-                </UI.Typography>
-                <small className="text-gray-400">
-                  Inklusive aller Gebühren und Nebenkosten.
-                </small>
+            <div className="bg-white rounded-b-2xl rounded-t-lg py-4 px-6 md:px-10 relative">
+              <div className="flex justify-between ">
+                <Image
+                  src={Dots.src}
+                  className="absolute w-full top-[-1px] left-0 px-2 h-1"
+                  width={100}
+                  height={3}
+                  alt="dots"
+                />
+                <div className="flex flex-col md:flex-row justify-between gap-2 w-full">
+                  <div>
+                    <UI.Typography
+                      type="h4"
+                      size={'h4'}
+                      weight={'bold'}
+                      className="whitespace-nowrap"
+                    >
+                      Fixpreis: €560,-
+                    </UI.Typography>
+                  </div>
+                  <div className={`flex md:justify-end w-full`}>
+                    <Button disabled={loading} size="lg" type="submit">
+                      Anfrage senden
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className={`flex justify-end w-full`}>
-                <Button disabled={loading} size="lg" type="submit">
-                  Anfrage senden
-                </Button>
-              </div>
+              <small className="text-gray-400">
+                Inklusive aller Gebühren und Nebenkosten.
+              </small>
             </div>
           </form>
         </Form>
