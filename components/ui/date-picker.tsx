@@ -23,6 +23,10 @@ export function DatePicker({ field, onSelect }: DatePickerProps) {
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
   const [date, setDate] = useState<Date | undefined>();
 
+  const today = new Date();
+  const fromDate = new Date(today);
+  fromDate.setDate(fromDate.getDate() + 2);
+
   const handleSelect = (date: Date) => {
     setDate(date);
     onSelect({ date: date, field: field });
@@ -46,7 +50,7 @@ export function DatePicker({ field, onSelect }: DatePickerProps) {
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"
-          fromDate={new Date()}
+          fromDate={fromDate}
           selected={date}
           onDayClick={handleSelect}
           initialFocus

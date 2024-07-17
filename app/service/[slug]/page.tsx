@@ -7,6 +7,7 @@ import { PostType } from '@/types/Post';
 import { pdpQuery } from '@/lib/queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
 import { Metadata } from 'next';
+import CardSlider from '@/components/molecules/card-slider';
 
 export async function generateMetadata({
   params,
@@ -16,17 +17,25 @@ export async function generateMetadata({
   const urlParams = new URLSearchParams(pdpQueryParams);
   urlParams.append('filters[slug][$eq]', params.slug);
 
-  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps?populate=SEO&filters[slug][$eq]=${params.slug}`;
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps?populate[0]=SEO&populate[1]=SEO.ogImage&filters[slug][$eq]=${params.slug}`;
   const pdpData = await fetch(strapiUrl, {
     next: { revalidate: 10 },
   });
 
   const data = await pdpData.json();
-  const metaData = data.data[0].attributes.SEO;
+  const metaData = data?.data[0]?.attributes.SEO;
+  const ogImage = metaData.ogImage?.data?.attributes.url;
 
   return {
-    title: metaData.title,
-    description: metaData.description,
+    title: metaData?.title,
+    description: metaData?.description,
+    openGraph: {
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
   };
 }
 
@@ -127,11 +136,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           )}
           <UI.Spacer size={'md'} />
-          <div className="flex gap-8">
+          <CardSlider posts={posts} />
+
+          {/*<div className="flex gap-8">
             {posts.map((post: PostType, index: number) => (
               <UI.ServiceCard key={index} post={post} />
             ))}
-          </div>
+          </div>*/}
           <UI.Spacer size={'lg'} />
           <UI.Spacer size={'lg'} />
         </div>

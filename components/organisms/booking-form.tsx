@@ -126,10 +126,19 @@ function BookingForm() {
                                   key={vehicle.name}
                                   value={vehicle.name}
                                 >
-                                  {vehicle.name}
-                                  <small className="block text-gray-500">
-                                    {vehicle.description}
-                                  </small>
+                                  <div className="flex gap-8 items-center w-full ">
+                                    <div className="text-left leading-4">
+                                      {vehicle.name}
+                                      <small className="block text-gray-500 w-auto">
+                                        {vehicle.description}
+                                      </small>
+                                    </div>
+                                    <Image
+                                      src={vehicle.image}
+                                      className="block text-gray-500 h-7 w-auto"
+                                      alt={vehicle.name}
+                                    />
+                                  </div>
                                 </UI.SelectItem>
                               ))}
                           </UI.SelectContent>

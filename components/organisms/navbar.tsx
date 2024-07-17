@@ -16,7 +16,7 @@ export default function Navbar() {
         <div
           className={`px-6 py-4 rounded-xl transition-all duration-500 container ${
             scrolled
-              ? ' bg-white bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-70 '
+              ? ' bg-white bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-70'
               : 'bg-white'
           }`}
         >
