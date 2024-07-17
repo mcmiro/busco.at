@@ -12,7 +12,7 @@ export type HeroProps = {
 
 function HeroHeader({ content }: HeroProps) {
   return (
-    <div className="relative py-8 px-4 h-screen">
+    <div className="relative py-8 px-4 min-h-screen lg:min-h-64 lg:max-h-[800px]">
       <Image
         src={content.image.data.attributes.url}
         alt="busco bus"

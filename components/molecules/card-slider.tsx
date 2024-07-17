@@ -35,8 +35,8 @@ function CardSlider({ posts }: CardSliderProps) {
       modules={[Autoplay]}
       effect="slide"
       fadeEffect={{ crossFade: true }}
-      speed={300}
-      autoplay={{ delay: 3000 }}
+      speed={800}
+      autoplay={{ delay: 4000 }}
       className="h-full"
       loop={true}
     >

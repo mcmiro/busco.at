@@ -14,20 +14,19 @@ function ServiceCard({ post }: ServiceCardProps) {
         className={`flex flex-col gap-4 w-full rounded-xl p-6 pb-10`}
         style={{ backgroundColor: post.colors.background }}
       >
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {post.tags.length &&
             post.tags.map((tag: string, index: number) => (
-              <UI.Button
+              <span
                 key={index}
-                size={'sm'}
-                className="rounded-full"
+                className="rounded-full text-sm px-2 py-0.5 whitespace-nowrap"
                 style={{
                   color: post.colors.textTag,
                   backgroundColor: post.colors.backgroundTag,
                 }}
               >
                 {tag}
-              </UI.Button>
+              </span>
             ))}
         </div>
         <div>
