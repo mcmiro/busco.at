@@ -1,5 +1,4 @@
 import React from 'react';
-//import HeaderImage from '@/public/images/header-service.jpg';
 import Image from 'next/image';
 import { UI } from '../index';
 import BookingForm from '../organisms/booking-form';
@@ -13,7 +12,7 @@ export type HeroProps = {
 
 function HeroHeader({ content }: HeroProps) {
   return (
-    <div className="relative py-8 px-4 min-h-screen">
+    <div className="relative py-8 px-4 h-screen">
       <Image
         src={content.image.data.attributes.url}
         alt="busco bus"

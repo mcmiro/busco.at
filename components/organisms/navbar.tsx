@@ -10,7 +10,7 @@ export default function Navbar() {
   const { scrolled } = useScroll();
 
   return (
-    <div className="fixed left-[50%] translate-x-[-50%] h-24 w-full px-6 z-40">
+    <div className="fixed left-[50%] translate-x-[-50%] h-24 w-full px-4 z-40">
       {/*<MenuMob />*/}
       <div className="flex items-center justify-center w-full h-full">
         <div

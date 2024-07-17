@@ -14,15 +14,29 @@ export type CardSliderProps = {
 };
 
 function CardSlider({ posts }: CardSliderProps) {
+  const breakpoints = {
+    0: {
+      slidesPerView: 1.25,
+    },
+    640: {
+      slidesPerView: 2.25,
+    },
+    1024: {
+      slidesPerView: 3.25,
+    },
+    1280: {
+      slidesPerView: 4.25,
+    },
+  };
   return (
     <Swiper
-      slidesPerView={2.5}
       spaceBetween={32}
+      breakpoints={breakpoints}
       modules={[Autoplay]}
       effect="slide"
       fadeEffect={{ crossFade: true }}
       speed={300}
-      autoplay={{ delay: 4000 }}
+      autoplay={{ delay: 3000 }}
       className="h-full"
       loop={true}
     >

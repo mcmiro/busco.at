@@ -3,7 +3,6 @@ import { UI } from '@/components/index';
 import Shape from '@/public/elements/shape.svg';
 import Image from 'next/image';
 import posts from '@/mocks/posts';
-import { PostType } from '@/types/Post';
 import { pdpQuery } from '@/lib/queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
 import { Metadata } from 'next';
@@ -29,6 +28,9 @@ export async function generateMetadata({
   return {
     title: metaData?.title,
     description: metaData?.description,
+    alternates: {
+      canonical: `./`,
+    },
     openGraph: {
       images: [
         {
@@ -137,12 +139,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
           <UI.Spacer size={'md'} />
           <CardSlider posts={posts} />
-
-          {/*<div className="flex gap-8">
-            {posts.map((post: PostType, index: number) => (
-              <UI.ServiceCard key={index} post={post} />
-            ))}
-          </div>*/}
           <UI.Spacer size={'lg'} />
           <UI.Spacer size={'lg'} />
         </div>
@@ -207,11 +203,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
           {/* Service Card START */}
           <div className="container mx-auto">
-            <div className="flex gap-8">
-              {posts.map((post: PostType, index: number) => (
-                <UI.ServiceCard key={index} post={post} />
-              ))}
-            </div>
+            <CardSlider posts={posts} />
           </div>
         </div>
         <UI.Spacer size={'lg'} />
