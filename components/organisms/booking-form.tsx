@@ -68,8 +68,13 @@ function BookingForm({ priceInfo }: BookingFormProps) {
         selectedVehicle === price.attributes.vehicle
     );
 
-    const price = vehiclePrice?.attributes?.pricePerKm || 0;
-    setPrice(price * priceInfo?.routeInfo?.distanceInKm);
+    const priceVehicle = vehiclePrice?.attributes?.pricePerKm || 0;
+    setPrice(
+      Math.round(
+        priceVehicle * priceInfo?.routeInfo?.distanceInKm +
+          priceInfo?.routeInfo?.additionalCosts
+      )
+    );
   };
 
   useEffect(() => {
