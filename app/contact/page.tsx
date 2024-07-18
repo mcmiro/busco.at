@@ -1,5 +1,4 @@
 'use client';
-import ContactForm from '@/components/organisms/booking-form';
 import { UI } from '@/components/index';
 
 export default function Page() {
@@ -55,9 +54,6 @@ export default function Page() {
           className="mt-4"
         >{`Let's Connect!`}</UI.Typography>
         <UI.Typography>I promise to respond within 48 hours.</UI.Typography>
-      </div>
-      <div className="pt-8">
-        <ContactForm />
       </div>
     </div>
   );
