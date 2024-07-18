@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   const data = await pdpData.json();
   const metaData = data?.data[0]?.attributes.SEO;
-  const ogImage = metaData.ogImage?.data?.attributes.url;
+  const ogImage = metaData?.ogImage?.data?.attributes.url;
 
   return {
     title: metaData?.title,
