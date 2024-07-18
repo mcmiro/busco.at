@@ -97,9 +97,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const page = pageData.data[0].attributes;
 
+  console.log('page: ', page);
+
+  const breadcrumbs = { title: page.heroSection.headline, url: page.slug };
+
   return (
     <>
-      {page.heroSection && <UI.Header content={page.heroSection} />}
+      {page.heroSection && (
+        <UI.Header content={page.heroSection} breadCrumbs={breadcrumbs} />
+      )}
       <main>
         <div className="container mx-auto px-4">
           {!!page?.sectionOne && (

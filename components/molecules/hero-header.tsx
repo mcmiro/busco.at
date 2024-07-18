@@ -3,14 +3,18 @@ import Image from 'next/image';
 import { UI } from '../index';
 import BookingForm from '../organisms/booking-form';
 import { HeroHeaderProps } from '@/types/HeroHeader';
-
-const breadcrumbs = [{ title: 'Busvermietung Wien', url: '/bus-mieten' }];
+import { BreadcrumbType } from '@/types/Breadcrumbs';
 
 export type HeroProps = {
   content: HeroHeaderProps;
+  breadCrumbs: BreadcrumbType;
 };
 
-function HeroHeader({ content }: HeroProps) {
+function HeroHeader({ content, breadCrumbs }: HeroProps) {
+  const breadcrumbs = [
+    { title: 'Service', url: '/service' },
+    { title: breadCrumbs.title, url: breadCrumbs.url },
+  ];
   return (
     <div className="relative py-8 px-4 min-h-screen lg:min-h-64 lg:max-h-[800px]">
       <Image
