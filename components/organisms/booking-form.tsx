@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import {
@@ -20,8 +20,15 @@ import Image from 'next/image';
 import { TimePicker } from '../ui/time-picker';
 import { DatePicker } from '../ui/date-picker';
 import vehicles from '@/constants/vehicles';
+import { PriceItemType } from '@/types/PriceItem';
+import ScrollTo from '../molecules/scroll-to';
+import { RouteType } from '@/types/RouteType';
 
-function BookingForm() {
+export type BookingFormProps = {
+  priceInfo: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
+};
+
+function BookingForm({ priceInfo }: BookingFormProps) {
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -30,6 +37,7 @@ function BookingForm() {
 
   const { handleDate, handleTime } = useBookingForm(form);
   const { bookingForm } = useBookingForm(form);
+  const [price, setPrice] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   //const [success, setSuccess] = useState(false);
 
@@ -52,6 +60,21 @@ function BookingForm() {
       console.log(error);
     }
   };
+
+  const handlePrice = () => {
+    const selectedVehicle = form.getValues('vehicle');
+    const vehiclePrice = priceInfo.prices.find(
+      (price: { attributes: PriceItemType }) =>
+        selectedVehicle === price.attributes.vehicle
+    );
+
+    const price = vehiclePrice?.attributes?.pricePerKm || 0;
+    setPrice(price * priceInfo?.routeInfo?.distanceInKm);
+  };
+
+  useEffect(() => {
+    handlePrice();
+  }, [form.getValues('vehicle')]);
 
   return (
     <div className="text-foreground w-full">
@@ -261,14 +284,16 @@ function BookingForm() {
                 />
                 <div className="flex flex-col md:flex-row justify-between gap-2 w-full">
                   <div>
-                    <UI.Typography
-                      type="h4"
-                      size={'h4'}
-                      weight={'bold'}
-                      className="whitespace-nowrap"
-                    >
-                      Fixpreis: €560,-
-                    </UI.Typography>
+                    {price > 0 && (
+                      <UI.Typography
+                        type="h4"
+                        size={'h4'}
+                        weight={'bold'}
+                        className="whitespace-nowrap"
+                      >
+                        Fixpreis: €{price},-
+                      </UI.Typography>
+                    )}
                   </div>
                   <div className={`flex md:justify-end w-full`}>
                     <Button disabled={loading} size="lg" type="submit">
@@ -284,6 +309,12 @@ function BookingForm() {
           </form>
         </Form>
       </>
+      {price > 0 && (
+        <ScrollTo
+          title={`${priceInfo.routeInfo.from.data.attributes.name} - ${priceInfo.routeInfo.to.data.attributes.name}`}
+          price={price}
+        />
+      )}
       {/*<UI.Typography size="h4">
           {' '}
           Thank you for the request! <br></br>I promise to respond within 48

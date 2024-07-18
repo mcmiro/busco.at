@@ -4,13 +4,16 @@ import { UI } from '../index';
 import BookingForm from '../organisms/booking-form';
 import { HeroHeaderProps } from '@/types/HeroHeader';
 import { BreadcrumbType } from '@/types/Breadcrumbs';
+import { PriceItemType } from '@/types/PriceItem';
+import { RouteType } from '@/types/RouteType';
 
 export type HeroProps = {
   content: HeroHeaderProps;
   breadCrumbs: BreadcrumbType;
+  priceInfo: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
 };
 
-function HeroHeader({ content, breadCrumbs }: HeroProps) {
+function HeroSection({ content, breadCrumbs, priceInfo }: HeroProps) {
   const breadcrumbs = [
     { title: 'Service', url: '/service' },
     { title: breadCrumbs.title, url: breadCrumbs.url },
@@ -50,11 +53,11 @@ function HeroHeader({ content, breadCrumbs }: HeroProps) {
           </div>
         </div>
         <div>
-          <BookingForm />
+          <BookingForm priceInfo={priceInfo} />
         </div>
       </div>
     </div>
   );
 }
 
-export default HeroHeader;
+export default HeroSection;

@@ -14,7 +14,6 @@ export type PriceTableProps = {
 };
 
 export function PriceTable({ content, prices }: PriceTableProps) {
-  console.log('prices', prices);
   return (
     <div>
       {!!content && (

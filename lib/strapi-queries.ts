@@ -18,4 +18,7 @@ export const pdpQueryParams = {
   'populate[16]': 'separatorSectionThree.cta',
   'populate[17]': 'separatorSectionThree.image',
   'populate[18]': 'otherBuses',
+  'populate[19]': 'routes',
+  'populate[20]': 'routes.from',
+  'populate[21]': 'routes.to',
 };

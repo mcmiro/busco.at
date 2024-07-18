@@ -1,7 +1,7 @@
 const defaultValues = {
   from: '',
   to: '',
-  vehicle: '',
+  vehicle: 'Reisebus',
   customers: '',
   date: '',
   time: '',

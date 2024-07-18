@@ -48,7 +48,7 @@ import Typography from './ui/typography';
 
 //Molecules
 import Breadcrumbs from './molecules/breadcrumbs';
-import HeroHeader from './molecules/hero-header';
+import HeroSection from './molecules/hero-section';
 import ListItem from './molecules/list-item';
 import RelatedLinks from './molecules/related-links';
 import ServiceCard from '@/components/molecules/service-card';
@@ -110,7 +110,7 @@ export const UI = {
 
   // Molecules
   Breadcrumbs,
-  HeroHeader,
+  HeroSection,
   List,
   RelatedLinks,
   ServiceCard,

@@ -20,7 +20,7 @@ export function Faq({ items }: FaqProps) {
         {items.map((faq: FaqType, index: number) => (
           <UI.AccordionItem value={`item-${index}`} key={index}>
             <UI.AccordionTrigger>
-              <UI.Typography size={'h5'} weight={'bold'}>
+              <UI.Typography size={'h5'} weight={'bold'} className="text-left">
                 {faq.question}
               </UI.Typography>
             </UI.AccordionTrigger>

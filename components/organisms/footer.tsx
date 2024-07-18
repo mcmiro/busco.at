@@ -1,6 +1,5 @@
 import { UI } from '../index';
 import Link from 'next/link';
-//import ScrollTo from '../molecules/scroll-to';
 
 export default function Footer() {
   return (
@@ -50,7 +49,6 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        {/*<ScrollTo title="Wien - Bad Aussee" price={560} />*/}
       </div>
     </footer>
   );

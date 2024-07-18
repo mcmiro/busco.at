@@ -96,15 +96,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   const page = pageData.data[0].attributes;
-
-  console.log('page: ', page);
-
+  const pdpPrice = page.routes.data && {
+    prices: prices,
+    routeInfo: page.routes.data[0]?.attributes, // should be changed for multiple routes, not only for the first match
+  };
   const breadcrumbs = { title: page.heroSection.headline, url: page.slug };
 
   return (
     <>
       {page.heroSection && (
-        <UI.Header content={page.heroSection} breadCrumbs={breadcrumbs} />
+        <UI.Header
+          content={page.heroSection}
+          breadCrumbs={breadcrumbs}
+          priceInfo={pdpPrice}
+        />
       )}
       <main>
         <div className="container mx-auto px-4">
