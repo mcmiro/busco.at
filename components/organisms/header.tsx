@@ -1,9 +1,9 @@
-import Navbar from './navbar';
 import { UI } from '../index';
 import { HeroHeaderProps } from '@/types/HeroHeader';
 import { BreadcrumbType } from '@/types/Breadcrumbs';
 import { PriceItemType } from '@/types/PriceItem';
 import { RouteType } from '@/types/RouteType';
+import { Navbar } from './navbar';
 
 export type HeaderProps = {
   content: HeroHeaderProps;

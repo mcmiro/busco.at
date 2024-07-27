@@ -3,7 +3,7 @@ import { UI } from '@/components/index';
 import Shape from '@/public/elements/shape.svg';
 import Image from 'next/image';
 import posts from '@/mocks/posts';
-import { pdpQuery } from '@/lib/queries';
+import { pdpQuery } from '@/lib/graphql-queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
 import { Metadata } from 'next';
 import CardSlider from '@/components/molecules/card-slider';

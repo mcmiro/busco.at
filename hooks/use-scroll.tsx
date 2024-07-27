@@ -7,7 +7,7 @@ const useScroll = () => {
     const onScroll = (e: Event) => {
       const eventPosition = (e.target as Document).documentElement.scrollTop;
 
-      if (eventPosition > 70) {
+      if (eventPosition > 300) {
         setScrolled(true);
       } else {
         setScrolled(false);

@@ -22,7 +22,8 @@ function ScrollTo({ price, title }: ScrollToProps) {
           <p></p>
         </div>
         <UI.Button className="rounded-full" onClick={scrollToTop}>
-          €{price},- | Jetzt buchen
+          <var className="not-italic">€{price},-</var>{' '}
+          <span className="pl-3">Jetzt buchen</span>
         </UI.Button>
       </div>
     </div>

@@ -126,7 +126,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                   )}
                 />
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-3 gap-4">
                 <FormField
                   control={form.control}
                   name="vehicle"
@@ -153,8 +153,9 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                                 <UI.SelectItem
                                   key={vehicle.name}
                                   value={vehicle.name}
+                                  className="relative min-h-10"
                                 >
-                                  <div className="flex gap-8 items-center w-full ">
+                                  <div className="absolute top-0 flex gap-8 items-center min-w-[260px] min-h-10">
                                     <div className="text-left leading-4">
                                       {vehicle.name}
                                       <small className="block text-gray-500 w-auto">
@@ -279,7 +280,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
             </div>
             {/* Retunr Journey END */}
             <div className="bg-white rounded-b-2xl rounded-t-lg py-4 px-6 md:px-10 relative">
-              <div className="flex justify-between ">
+              <div className="flex justify-between">
                 <Image
                   src={Dots.src}
                   className="absolute w-full top-[-1px] left-0 px-2 h-1"
@@ -296,7 +297,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                         weight={'bold'}
                         className="whitespace-nowrap"
                       >
-                        Fixpreis: €{price},-
+                        Fixpreis: <var className="not-italic">€{price},-</var>
                       </UI.Typography>
                     )}
                   </div>
