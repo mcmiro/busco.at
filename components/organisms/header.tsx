@@ -3,7 +3,7 @@ import { HeroHeaderProps } from '@/types/HeroHeader';
 import { BreadcrumbType } from '@/types/Breadcrumbs';
 import { PriceItemType } from '@/types/PriceItem';
 import { RouteType } from '@/types/RouteType';
-import { Navbar } from './navbar';
+import { Navigation } from './navigation';
 
 export type HeaderProps = {
   content: HeroHeaderProps;
@@ -18,7 +18,7 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header>
-      <Navbar />
+      <Navigation />
       <div className="pt-24">
         <UI.HeroSection
           content={content}

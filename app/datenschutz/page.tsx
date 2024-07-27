@@ -31,7 +31,7 @@ export default async function Page() {
 
   return (
     <>
-      <UI.Navbar />
+      <UI.Navigation />
       <main className="pt-32 container mx-auto px-4">
         <UI.Typography
           type="h1"

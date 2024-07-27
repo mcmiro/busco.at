@@ -46,7 +46,7 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = 'ListItem';
 
-export function Navbar() {
+export function Navigation() {
   const { scrolled } = useScroll();
   const [isMobileOpen, setIsMobileOpen] = React.useState<boolean>(false);
 

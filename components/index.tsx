@@ -62,7 +62,7 @@ import Footer from '@/components/organisms/footer';
 import Header from '@/components/organisms/header';
 import HeadlineContent from './organisms/headline-content';
 import List from './organisms/list';
-import Navbar from '@/components/organisms/navbar';
+import { Navigation } from '@/components/organisms/navigation';
 import Rating from './organisms/rating';
 import { PriceTable } from './organisms/price-table';
 import { Testimonials } from './organisms/testimonials';
@@ -124,7 +124,7 @@ export const UI = {
   Header,
   HeadlineContent,
   ListItem,
-  Navbar,
+  Navigation,
   PriceTable,
   Rating,
 };
