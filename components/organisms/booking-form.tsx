@@ -126,72 +126,76 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                   )}
                 />
               </div>
-              <div className="grid md:grid-cols-3 gap-4">
-                <FormField
-                  control={form.control}
-                  name="vehicle"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Fahrzeug</FormLabel>
-                      <FormControl>
-                        <UI.Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                          defaultValue={field.value}
-                        >
-                          <UI.FormControl>
-                            <UI.SelectTrigger>
-                              <UI.SelectValue
-                                defaultValue={field.value}
-                                placeholder="Fahrzeug"
-                              />
-                            </UI.SelectTrigger>
-                          </UI.FormControl>
-                          <UI.SelectContent>
-                            {vehicles?.length &&
-                              vehicles.map((vehicle) => (
-                                <UI.SelectItem
-                                  key={vehicle.name}
-                                  value={vehicle.name}
-                                  className="relative min-h-10"
-                                >
-                                  <div className="absolute top-0 flex gap-8 items-center min-w-[260px] min-h-10">
-                                    <div className="text-left leading-4">
-                                      {vehicle.name}
-                                      <small className="block text-gray-500 w-auto">
-                                        {vehicle.description}
-                                      </small>
+              <div className="grid md:grid-cols-8 gap-4">
+                <div className="md:col-span-5">
+                  <FormField
+                    control={form.control}
+                    name="vehicle"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Fahrzeug</FormLabel>
+                        <FormControl>
+                          <UI.Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={field.value}
+                          >
+                            <UI.FormControl>
+                              <UI.SelectTrigger>
+                                <UI.SelectValue
+                                  defaultValue={field.value}
+                                  placeholder="Fahrzeug"
+                                />
+                              </UI.SelectTrigger>
+                            </UI.FormControl>
+                            <UI.SelectContent>
+                              {vehicles?.length &&
+                                vehicles.map((vehicle) => (
+                                  <UI.SelectItem
+                                    key={vehicle.name}
+                                    value={vehicle.name}
+                                    className="relative min-h-10"
+                                  >
+                                    <div className="absolute top-0 flex gap-4 md:gap-8 items-center justify-between min-h-10">
+                                      <div className="text-left leading-4">
+                                        {vehicle.name}
+                                        <small className="block text-gray-500 w-auto">
+                                          {vehicle.description}
+                                        </small>
+                                      </div>
+                                      <Image
+                                        src={vehicle.image}
+                                        className="block text-gray-500 h-7 w-auto"
+                                        alt={vehicle.name}
+                                      />
                                     </div>
-                                    <Image
-                                      src={vehicle.image}
-                                      className="block text-gray-500 h-7 w-auto"
-                                      alt={vehicle.name}
-                                    />
-                                  </div>
-                                </UI.SelectItem>
-                              ))}
-                          </UI.SelectContent>
-                        </UI.Select>
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="customers"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Personen</FormLabel>
-                      <FormControl>
-                        <Input
-                          disabled={loading}
-                          placeholder="Personen"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+                                  </UI.SelectItem>
+                                ))}
+                            </UI.SelectContent>
+                          </UI.Select>
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <FormField
+                    control={form.control}
+                    name="customers"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Personen</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={loading}
+                            placeholder="Personen"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <FormField

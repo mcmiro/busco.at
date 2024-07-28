@@ -1,28 +1,46 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { PostType } from '@/types/Post';
 import Image from 'next/image';
 import { UI } from '../index';
+import colors from '@/constants/postColors';
 
 export type ServiceCardProps = {
   post: PostType;
 };
 
 function ServiceCard({ post }: ServiceCardProps) {
+  const [colorIndex, setColorIndex] = useState<number>(0);
+
+  useEffect(() => {
+    handleCardColor();
+  }, []);
+
+  const handleCardColor = () => {
+    const newColorIndex = randNumber();
+    setColorIndex(newColorIndex !== colorIndex ? newColorIndex : randNumber());
+  };
+
+  const randNumber = () => {
+    const max = colors.length - 1;
+    return Math.floor(Math.random() * (max - 0 + 1) + 0);
+  };
+
   return (
     <article className="flex flex-col items-start">
       <div
         className={`flex flex-col gap-4 w-full rounded-xl p-6 pb-10`}
-        style={{ backgroundColor: post.colors.background }}
+        style={{ backgroundColor: colors[colorIndex].background }}
       >
         <div className="flex flex-wrap gap-2">
-          {post.tags.length &&
+          {!!post.tags?.length &&
             post.tags.map((tag: string, index: number) => (
               <span
                 key={index}
                 className="rounded-full text-sm px-2 py-0.5 whitespace-nowrap"
                 style={{
-                  color: post.colors.textTag,
-                  backgroundColor: post.colors.backgroundTag,
+                  color: colors[colorIndex].textTag,
+                  backgroundColor: colors[colorIndex].backgroundTag,
                 }}
               >
                 {tag}
@@ -35,7 +53,7 @@ function ServiceCard({ post }: ServiceCardProps) {
               <UI.Typography
                 weight={'semibold'}
                 size={'h4'}
-                style={{ color: post.colors.title }}
+                style={{ color: colors[colorIndex].title }}
               >
                 {post.title}
               </UI.Typography>
@@ -45,10 +63,10 @@ function ServiceCard({ post }: ServiceCardProps) {
         <div className="relative flex items-center gap-x-4">
           <div
             className="text-sm leading-6 text-green-50"
-            style={{ color: post.colors.copy }}
+            style={{ color: colors[colorIndex].copy }}
           >
             <UI.Typography
-              style={{ color: post.colors.copy }}
+              style={{ color: colors[colorIndex].copy }}
               className="text-[16px]"
             >
               {post.content}

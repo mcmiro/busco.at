@@ -7,7 +7,7 @@ export default async function Index() {
         <Navigation />
       </header>
       <main>
-        <div className="container mx-auto h-[6000px]">Test Main</div>
+        <div className="container mx-auto min-h-screen">Test Main</div>
       </main>
     </>
   );

@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { UI } from '@/components/index';
 import Shape from '@/public/elements/shape.svg';
 import Image from 'next/image';
-import posts from '@/mocks/posts';
 import { pdpQuery } from '@/lib/graphql-queries';
 import { pdpQueryParams } from '@/lib/strapi-queries';
 import { Metadata } from 'next';
@@ -82,7 +81,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   // PDP separated API Call (because graphql strapi plugin has a bug for filters: https://github.com/strapi/strapi/issues/19972)
   const urlParams = new URLSearchParams(pdpQueryParams);
-  urlParams.append('filters[slug][$eq]', params.slug);
 
   const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/pdps?${urlParams}`;
   const pdpData = await fetch(strapiUrl, {
@@ -90,12 +88,49 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   const pageData = await pdpData.json();
+  const matchedPdp = pageData.data.find(
+    (pdp: any) => pdp.attributes.slug === params.slug
+  );
+
   // redirect to 404 if no data
-  if (!pageData.data[0]) {
+  if (!matchedPdp) {
     return notFound();
   }
 
-  const page = pageData.data[0].attributes;
+  const cardsWithRoutes = pageData.data.map((pdp: any) => {
+    if (pdp.attributes.routes?.data.length > 0) {
+      const cardContent = {
+        title: pdp.attributes.heroSection?.headline,
+        content: pdp.attributes.cardDescription,
+        image: pdp.attributes.heroSection.image.data.attributes.url,
+        href: pdp.attributes.slug,
+        tags: pdp.attributes.tags.map((tag: any) => tag.tag),
+      };
+
+      return cardContent;
+    }
+    return;
+  });
+
+  const cardsWithoutRoutes = pageData.data.map((pdp: any) => {
+    if (
+      !pdp.attributes.routes?.data ||
+      pdp.attributes.routes.data.length === 0
+    ) {
+      const cardContent = {
+        title: pdp.attributes.heroSection?.headline,
+        content: pdp.attributes.cardDescription,
+        image: pdp.attributes.heroSection.image.data.attributes.url,
+        href: pdp.attributes.slug,
+        tags: pdp.attributes.tags.map((tag: any) => tag.tag),
+      };
+
+      return cardContent;
+    }
+    return;
+  });
+
+  const page = matchedPdp.attributes;
   const pdpPrice = page.routes.data && {
     prices: prices,
     routeInfo: page.routes.data[0]?.attributes, // should be changed for multiple routes, not only for the first match
@@ -149,7 +184,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           )}
           <UI.Spacer size={'md'} />
-          <CardSlider posts={posts} />
+          <CardSlider posts={cardsWithRoutes} />
           <UI.Spacer size={'lg'} />
           <UI.Spacer size={'lg'} />
         </div>
@@ -214,7 +249,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
           {/* Service Card START */}
           <div className="container mx-auto">
-            <CardSlider posts={posts} />
+            <CardSlider posts={cardsWithoutRoutes} />
           </div>
         </div>
         <UI.Spacer size={'lg'} />

@@ -89,7 +89,7 @@ export function Navigation() {
                             </NavigationMenuContent>
                           </>
                         ) : (
-                          <Link href="/docs" legacyBehavior passHref>
+                          <Link href={navItem.url} legacyBehavior passHref>
                             <NavigationMenuLink
                               className={navigationMenuTriggerStyle()}
                             >

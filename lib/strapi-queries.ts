@@ -21,4 +21,6 @@ export const pdpQueryParams = {
   'populate[19]': 'routes',
   'populate[20]': 'routes.from',
   'populate[21]': 'routes.to',
+  'populate[22]': 'tags',
+  'populate[23]': 'tags.tag',
 };

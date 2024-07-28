@@ -1,4 +1,4 @@
-export type ColorsType = {
+export type ColorType = {
   backgroundTag: string;
   textTag: string;
   background: string;
@@ -10,7 +10,6 @@ export type PostType = {
   title: string;
   content: string;
   image: string;
-  tags: string[];
+  tags?: string[];
   href: string;
-  colors: ColorsType;
 };

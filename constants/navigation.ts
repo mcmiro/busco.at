@@ -6,17 +6,17 @@ const navigation: NavItemType[] = [
     title: 'Bus mieten',
     url: '/',
     dropdown: [
-      { title: 'Bus mit Fahrer mieten', url: 'service/bus-mieten-wien' },
-      { title: 'Bus für Schulklassen', url: 'service/bus-mieten-schulklasse' },
+      { title: 'Bus mit Fahrer mieten', url: '/service/bus-mieten-wien' },
+      { title: 'Bus für Schulklassen', url: '/service/bus-mieten-schulklasse' },
       {
         title: 'Bus für Shuttle-Service',
-        url: 'service/shuttle-bus-mieten-wien',
+        url: '/service/shuttle-bus-mieten-wien',
       },
       {
         title: 'Bus für Betriebsfahrten',
-        url: 'service/bus-mieten-betriebsfahrten',
+        url: '/service/bus-mieten-betriebsfahrten-wien',
       },
-      { title: 'Bus für Hochzeiten', url: 'service/bus-mieten-hochzeit-wien' },
+      { title: 'Bus für Hochzeiten', url: '/service/bus-mieten-hochzeit-wien' },
     ],
     isOpen: false,
   },
