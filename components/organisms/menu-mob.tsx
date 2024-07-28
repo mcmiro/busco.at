@@ -68,7 +68,9 @@ export default function MenuMob({ onClick }: MenbuMobProps) {
                     {el.dropdown.map(
                       (navItem: NavItemType, indexKey: number) => (
                         <li key={indexKey} className="pb-4">
-                          {navItem.title}
+                          <Link href={navItem.url} key={index}>
+                            {navItem.title}
+                          </Link>
                         </li>
                       )
                     )}
