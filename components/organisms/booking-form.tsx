@@ -39,12 +39,14 @@ function BookingForm({ priceInfo }: BookingFormProps) {
   const { bookingForm } = useBookingForm(form);
   const [price, setPrice] = useState<number>(0);
   const [loading, setLoading] = useState(false);
+  const [from, setFrom] = useState<string>('');
+  const [to, setTo] = useState<string>('');
   //const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data: BookingFormValues) => {
     try {
       setLoading(true);
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('/api/send-service-request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,24 +64,35 @@ function BookingForm({ priceInfo }: BookingFormProps) {
   };
 
   const handlePrice = () => {
+    setFrom(priceInfo.routeInfo.from.data.attributes.name);
+    setTo(priceInfo.routeInfo.to.data.attributes.name);
+
     const selectedVehicle = form.getValues('vehicle');
     const vehiclePrice = priceInfo.prices.find(
       (price: { attributes: PriceItemType }) =>
         selectedVehicle === price.attributes.vehicle
     );
-
-    const priceVehicle = vehiclePrice?.attributes?.pricePerKm || 0;
-    setPrice(
-      Math.round(
-        priceVehicle * priceInfo?.routeInfo?.distanceInKm +
-          priceInfo?.routeInfo?.additionalCosts
-      )
-    );
+    const total = vehiclePrice?.attributes?.pricePerKm || 0;
+    if (form.getValues('from') === from && form.getValues('to') === to) {
+      setPrice(
+        Math.round(
+          total * priceInfo?.routeInfo?.distanceInKm +
+            priceInfo?.routeInfo?.additionalCosts
+        )
+      );
+    } else {
+      setPrice(0);
+    }
   };
 
   useEffect(() => {
     handlePrice();
-  }, [form.getValues('vehicle')]);
+  }, [form.getValues('vehicle'), form.getValues('from'), form.getValues('to')]);
+
+  useEffect(() => {
+    from && form.setValue('from', from);
+    to && form.setValue('to', to);
+  }, [from, to]);
 
   return (
     <div className="text-foreground w-full">
@@ -127,7 +140,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                 />
               </div>
               <div className="grid md:grid-cols-8 gap-4">
-                <div className="md:col-span-5">
+                <div className="md:col-span-4 lg:col-span-5 xl:col-span-4">
                   <FormField
                     control={form.control}
                     name="vehicle"
@@ -178,7 +191,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                     )}
                   />
                 </div>
-                <div className="md:col-span-3">
+                <div className="md:col-span-4 lg:col-span-3 xl:col-span-4">
                   <FormField
                     control={form.control}
                     name="customers"
@@ -325,11 +338,11 @@ function BookingForm({ priceInfo }: BookingFormProps) {
           price={price}
         />
       )}
-      {/*<UI.Typography size="h4">
-          {' '}
-          Thank you for the request! <br></br>I promise to respond within 48
-          hours.
-        </UI.Typography>*/}
+      <UI.Typography size="h4">
+        {' '}
+        Thank you for the request! <br></br>I promise to respond within 48
+        hours.
+      </UI.Typography>
     </div>
   );
 }

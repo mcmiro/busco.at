@@ -1,12 +1,9 @@
-// app/api/send-email/route.ts
-
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
     const {
-      from,
       to,
       vehicle,
       customers,
@@ -29,11 +26,20 @@ export async function POST(request: NextRequest) {
     });
 
     const mailOptions = {
-      from: `"miro.grujin@hotmail.com" <busco>`,
-      to: 'miro.grujin@hotmail.com',
+      from: `"busco" <${process.env.NEXT_GMAIL_USER}>`,
+      to: ['miro.grujin@hotmail.com', process.env.NEXT_GMAIL_USER!.toString()],
       cc: process.env.GMAIL_USER,
       subject: 'busco.at - Anfrage',
-      text: `${from} ${to} ${vehicle} ${customers} ${date} ${time} ${returnJourney} ${returnDate} ${returnTime}`,
+      text: `
+				Empfänger Email: ${to}
+				Fahrzeug: ${vehicle} 
+				Personen: ${customers} 
+				Datum: ${date}
+				Uhrzeit: ${time}
+				Rückfahrt: ${returnJourney ? 'Ja' : 'Nein'} 
+				Rückfahrt Datum: ${returnDate}
+				Rückfahrt Uhrzeit: ${returnTime}
+			`,
     };
 
     await transporter.sendMail(mailOptions);

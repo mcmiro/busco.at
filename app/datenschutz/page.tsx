@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/terms-and-condition`;
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/terms-and-condition?populate=*`;
   const response = await fetch(strapiUrl, {
     next: { revalidate: 10 },
   });
@@ -31,7 +31,9 @@ export default async function Page() {
 
   return (
     <>
-      <UI.Navigation />
+      <header className="min-h-24">
+        <UI.Navigation />
+      </header>
       <main className="pt-32 container mx-auto px-4">
         <UI.Typography
           type="h1"

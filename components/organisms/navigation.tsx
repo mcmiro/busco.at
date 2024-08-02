@@ -101,10 +101,12 @@ export function Navigation() {
                     ))}
                 </NavigationMenuList>
               </NavigationMenu>
-              <div className={`flex items-center justify-center px-4 h-full`}>
+              <div
+                className={`flex md:hidden items-center justify-center px-4 h-full`}
+              >
                 <div
                   onClick={() => setIsMobileOpen(true)}
-                  className="flex md:hidden flex-col items-center justify-center focus:outline-none focus:shadow-outline cursor-pointer"
+                  className="flex flex-col items-center justify-center focus:outline-none focus:shadow-outline cursor-pointer"
                 >
                   <div className="w-10 h-[3px] bg-black mb-3 rounded-full"></div>
                   <div className="w-10 h-[3px] bg-black rounded-full"></div>

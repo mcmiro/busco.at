@@ -31,8 +31,10 @@ export default async function Page() {
 
   return (
     <>
-      <UI.Navigation />
-      <main className="pt-32 container mx-auto px-4">
+      <header className="min-h-24">
+        <UI.Navigation />
+      </header>
+      <main className="pt-32 container mx-auto max-w-3xl px-4">
         <UI.Typography
           type="h1"
           size="h3"
