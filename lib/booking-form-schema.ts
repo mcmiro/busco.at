@@ -2,6 +2,12 @@ import * as z from 'zod';
 import getFormData from '@/lib/form-data';
 
 export const formSchema = z.object({
+  name: z.string().min(1, { message: 'Name ist Pflichtfeld' }),
+  email: z
+    .string()
+    .min(1, { message: 'E-Mail ist Pflichtfeld' })
+    .email('Ungültiges E-Mail-Format'),
+  message: z.string().optional(),
   from: z.string().min(1, { message: 'Von ist Pflichtfeld' }),
   to: z.string().min(1, { message: 'Nach ist Pflichtfeld' }),
   vehicle: z.string().min(1, { message: 'Fahrzeug ist Pflichtfeld' }),

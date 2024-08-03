@@ -4,7 +4,6 @@ import nodemailer from 'nodemailer';
 export async function POST(request: NextRequest) {
   try {
     const {
-      to,
       vehicle,
       customers,
       date,
@@ -12,6 +11,9 @@ export async function POST(request: NextRequest) {
       returnJourney,
       returnDate,
       returnTime,
+      name,
+      email,
+      message,
     } = await request.json();
 
     const transporter = nodemailer.createTransport({
@@ -27,11 +29,12 @@ export async function POST(request: NextRequest) {
 
     const mailOptions = {
       from: `"busco" <${process.env.NEXT_GMAIL_USER}>`,
-      to: ['miro.grujin@hotmail.com', process.env.NEXT_GMAIL_USER!.toString()],
+      to: [email, process.env.NEXT_GMAIL_USER!.toString()],
       cc: process.env.GMAIL_USER,
       subject: 'busco.at - Anfrage',
       text: `
-				Empfänger Email: ${to}
+				Name: ${name} 
+				Email: ${email}
 				Fahrzeug: ${vehicle} 
 				Personen: ${customers} 
 				Datum: ${date}
@@ -39,6 +42,7 @@ export async function POST(request: NextRequest) {
 				Rückfahrt: ${returnJourney ? 'Ja' : 'Nein'} 
 				Rückfahrt Datum: ${returnDate}
 				Rückfahrt Uhrzeit: ${returnTime}
+				Nachricht: ${message}
 			`,
     };
 
