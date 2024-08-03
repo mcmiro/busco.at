@@ -17,7 +17,7 @@ export default function Footer() {
               <Link href="/ueber-busco">Über Busco</Link>
             </li>
             <li>
-              <Link href="/kontakt">Kontakt</Link>
+              <Link href="/anfrage">Kontakt</Link>
             </li>
             <li>
               <Link href="/impressum">Impressum</Link>

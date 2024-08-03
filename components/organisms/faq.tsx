@@ -39,7 +39,7 @@ export function Faq({ items }: FaqProps) {
             Ihre Frage nicht dabei? Unser Team hilft gerne weiter.
           </UI.Typography>
           <div className="flex flex-row gap-4 items-center text-indigo-700">
-            <Link href="/kontakt" className="font-semibold">
+            <Link href="/anfrage" className="font-semibold">
               Kontakt
             </Link>
             <ArrowRightCircle />

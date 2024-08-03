@@ -35,7 +35,7 @@ export default function Page() {
       <header className="min-h-24">
         <UI.Navigation />
       </header>
-      <main className="max-w-3xl min-w-3xl w-full mx-auto mt-8 px-4 ">
+      <main className="max-w-3xl w-full mx-auto mt-8 px-4 ">
         <UI.Typography
           type="h1"
           size="h3"
