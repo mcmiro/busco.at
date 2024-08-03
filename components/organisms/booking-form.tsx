@@ -37,9 +37,17 @@ function BookingForm({ priceInfo }: BookingFormProps) {
     mode: 'onChange',
   });
 
-  const { handleDate, handleTime } = useBookingForm(form);
-  const { bookingForm, handlePrice, price, from, to, currentStep, nextStep } =
-    useBookingForm(form);
+  const {
+    bookingForm,
+    handlePrice,
+    price,
+    from,
+    to,
+    currentStep,
+    nextStep,
+    handleDate,
+    handleTime,
+  } = useBookingForm(form);
 
   const [loading, setLoading] = useState(false);
 
