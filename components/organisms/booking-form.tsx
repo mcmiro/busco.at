@@ -62,6 +62,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
         body: JSON.stringify(data),
       });
       if (response) {
+        nextStep();
         form.reset();
       }
       setLoading(false);
@@ -336,7 +337,11 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                     <FormItem>
                       <FormLabel>Anmerkungen</FormLabel>
                       <FormControl>
-                        <Textarea {...field} value={field.value ?? ''} />
+                        <Textarea
+                          {...field}
+                          value={field.value ?? ''}
+                          disabled={loading}
+                        />
                       </FormControl>
                     </FormItem>
                   )}
