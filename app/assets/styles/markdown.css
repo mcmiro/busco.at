@@ -21,13 +21,6 @@
     height: auto !important;
     li {
       @apply relative flex items-center gap-2 mb-4;
-      &::before {
-        content: '';
-        background-image: url('/icons/check2-circle.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-        @apply w-6 h-6 block;
-      }
     }
   }
 

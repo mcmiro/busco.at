@@ -41,7 +41,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/service/bus-mieten-betriebsfahrten">
+              <Link href="/service/bus-mieten-betriebsfahrten-wien">
                 Bus für Betriebsfahrten mieten in Wien
               </Link>
             </li>
