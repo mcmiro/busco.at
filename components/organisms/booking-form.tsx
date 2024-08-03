@@ -294,7 +294,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
             )}
             {currentStep === 1 && (
               <div className="flex flex-col gap-4 bg-white rounded-b-lg pb-6 px-6 md:px-10">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="name"
