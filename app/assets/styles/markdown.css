@@ -19,7 +19,7 @@
     @apply list-outside mt-8;
     width: 100% !important;
     height: auto !important;
-    display: block;
+    display: block !important;
     li {
       @apply relative flex items-center gap-2 mb-4;
     }
