@@ -21,7 +21,7 @@
     height: auto !important;
     display: block !important;
     li {
-      @apply relative flex items-center gap-2 mb-4;
+      @apply mb-4;
     }
   }
 

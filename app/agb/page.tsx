@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/privacy-policy-page?populate=*`;
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/terms-and-condition?populate=*`;
   const response = await fetch(strapiUrl, {
     next: { revalidate: 10 },
   });

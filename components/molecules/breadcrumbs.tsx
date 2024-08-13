@@ -10,7 +10,7 @@ export type BreadcrumbsProps = {
 
 function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <div className="flex gap-4 text-base">
+    <div className="gap-4 text-base hidden md:flex">
       <div>
         <Link href="/">
           <Home className="w-4" />

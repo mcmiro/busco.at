@@ -33,11 +33,6 @@ const useBookingForm = (form: FieldValues) => {
     setBokingForm(watchedValues);
   }, [watchedValues]);
 
-  //useEffect(() => {
-  //  currentStep === 1 && form.clearErrors();
-  //  currentStep === 1 && console.log('current step', currentStep);
-  //}, [currentStep]);
-
   const handleDate = (payload: { date: Date; field: string }) => {
     const formattedDate = format(payload.date, 'dd.MM.yyyy');
     form.setValue(payload.field, formattedDate);
@@ -59,7 +54,10 @@ const useBookingForm = (form: FieldValues) => {
         selectedVehicle === price.attributes.vehicle
     );
     const total = vehiclePrice?.attributes?.pricePerKm || 0;
-    if (form.getValues('from') === from && form.getValues('to') === to) {
+    if (
+      form.getValues('from').toLowerCase() === from.toLowerCase() &&
+      form.getValues('to').toLowerCase() === to.toLowerCase()
+    ) {
       setPrice(
         Math.round(
           total * priceInfo?.routeInfo?.distanceInKm +

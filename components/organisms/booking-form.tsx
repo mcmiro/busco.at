@@ -371,7 +371,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                   />
                   <div className="flex flex-col md:flex-row justify-between gap-2 w-full">
                     <div>
-                      {price > 0 && (
+                      {price > 0 ? (
                         <UI.Typography
                           type="h4"
                           size={'h4'}
@@ -379,6 +379,15 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                           className="whitespace-nowrap"
                         >
                           Fixpreis: <var className="not-italic">€{price},-</var>
+                        </UI.Typography>
+                      ) : (
+                        <UI.Typography
+                          type="h4"
+                          size={'h4'}
+                          weight={'bold'}
+                          className="whitespace-nowrap"
+                        >
+                          Preis auf Anfrage
                         </UI.Typography>
                       )}
                     </div>
@@ -395,9 +404,11 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                     </div>
                   </div>
                 </div>
-                <small className="text-gray-400">
-                  Inklusive aller Gebühren und Nebenkosten.
-                </small>
+                {price > 0 && (
+                  <small className="text-gray-400">
+                    Inklusive aller Gebühren und Nebenkosten.
+                  </small>
+                )}
               </div>
             )}
           </form>

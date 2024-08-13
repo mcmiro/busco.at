@@ -42,18 +42,26 @@ function HeroSection({ content, breadCrumbs, priceInfo }: HeroProps) {
             >
               {content.headline}
             </UI.Typography>
-            <UI.List className="mt-8">
+            <UI.List className="mt-8 hidden md:block">
               {content.benefits.map((benefit) => (
                 <UI.ListItem key={benefit.id} item={benefit.title} />
               ))}
             </UI.List>
           </div>
-          <div className="pb-8">
+          <div className="pb-8 hidden md:block">
             <UI.Rating value={content.rating} />
           </div>
         </div>
-        <div>
+        <div className="pt-8 md:pt-0">
           <BookingForm priceInfo={priceInfo} />
+        </div>
+        <UI.List className="mt-8 block md:hidden">
+          {content.benefits.map((benefit) => (
+            <UI.ListItem key={benefit.id} item={benefit.title} />
+          ))}
+        </UI.List>
+        <div className="pt-8 block md:hidden">
+          <UI.Rating value={content.rating} />
         </div>
       </div>
     </div>
