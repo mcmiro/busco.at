@@ -28,7 +28,7 @@ import steps from '@/lib/booking-form-steps';
 import Autocomplete from '../molecules/autocomplete';
 
 export type BookingFormProps = {
-  priceInfo: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
+  priceInfo?: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
 };
 
 function BookingForm({ priceInfo }: BookingFormProps) {
@@ -115,22 +115,6 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                     fieldName="to"
                     placeholder="Ziel"
                   />
-                  {/*<FormField
-                    control={form.control}
-                    name="to"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Nach</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            disabled={loading}
-                            placeholder="Ziel"
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />*/}
                 </div>
                 <div className="grid md:grid-cols-8 gap-4">
                   <div className="md:col-span-4 lg:col-span-5 xl:col-span-4">
@@ -413,7 +397,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
       </>
       {price > 0 && (
         <ScrollTo
-          title={`${priceInfo.routeInfo.from.data.attributes.name} - ${priceInfo.routeInfo.to.data.attributes.name}`}
+          title={`${priceInfo?.routeInfo.from.data.attributes.name} - ${priceInfo?.routeInfo.to.data.attributes.name}`}
           price={price}
         />
       )}
