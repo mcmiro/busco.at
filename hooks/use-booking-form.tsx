@@ -45,8 +45,8 @@ const useBookingForm = (form: FieldValues) => {
   };
 
   const handlePrice = (priceInfo: PriceInfoType) => {
-    setFrom(priceInfo.routeInfo.from.data.attributes.name);
-    setTo(priceInfo.routeInfo.to.data.attributes.name);
+    setFrom(priceInfo.routeInfo?.from.data.attributes.name);
+    setTo(priceInfo.routeInfo?.to.data.attributes.name);
 
     const selectedVehicle = form.getValues('vehicle');
     const vehiclePrice = priceInfo.prices.find(
@@ -55,8 +55,8 @@ const useBookingForm = (form: FieldValues) => {
     );
     const total = vehiclePrice?.attributes?.pricePerKm || 0;
     if (
-      form.getValues('from').toLowerCase() === from.toLowerCase() &&
-      form.getValues('to').toLowerCase() === to.toLowerCase()
+      form.getValues('from')?.toLowerCase() === from?.toLowerCase() &&
+      form.getValues('to')?.toLowerCase() === to?.toLowerCase()
     ) {
       setPrice(
         Math.round(

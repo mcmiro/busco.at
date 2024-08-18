@@ -25,6 +25,7 @@ import ScrollTo from '../molecules/scroll-to';
 import { RouteType } from '@/types/RouteType';
 import { Textarea } from '../ui/textarea';
 import steps from '@/lib/booking-form-steps';
+import Autocomplete from '../molecules/autocomplete';
 
 export type BookingFormProps = {
   priceInfo: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
@@ -72,7 +73,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
   };
 
   useEffect(() => {
-    handlePrice(priceInfo);
+    priceInfo && handlePrice(priceInfo);
   }, [form.getValues('vehicle'), form.getValues('from'), form.getValues('to')]);
 
   useEffect(() => {
@@ -102,23 +103,19 @@ function BookingForm({ priceInfo }: BookingFormProps) {
             {currentStep === 0 && (
               <div className="flex flex-col gap-4 bg-white rounded-b-lg pb-6 px-6 md:px-10">
                 <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="from"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Von</FormLabel>
-                        <FormControl>
-                          <Input
-                            disabled={loading}
-                            placeholder="Start"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                  <Autocomplete
+                    form={form}
+                    label="Von"
+                    fieldName="from"
+                    placeholder="Start"
                   />
-                  <FormField
+                  <Autocomplete
+                    form={form}
+                    label="Nach"
+                    fieldName="to"
+                    placeholder="Ziel"
+                  />
+                  {/*<FormField
                     control={form.control}
                     name="to"
                     render={({ field }) => (
@@ -126,14 +123,14 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                         <FormLabel>Nach</FormLabel>
                         <FormControl>
                           <Input
+                            {...field}
                             disabled={loading}
                             placeholder="Ziel"
-                            {...field}
                           />
                         </FormControl>
                       </FormItem>
                     )}
-                  />
+                  />*/}
                 </div>
                 <div className="grid md:grid-cols-8 gap-4">
                   <div className="md:col-span-4 lg:col-span-5 xl:col-span-4">

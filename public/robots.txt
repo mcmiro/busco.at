@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://busco.at
+
+# Sitemaps
+Sitemap: https://busco.at/sitemap.xml

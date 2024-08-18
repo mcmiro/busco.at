@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer';
 export async function POST(request: NextRequest) {
   try {
     const {
+      from,
+      to,
       vehicle,
       customers,
       date,
@@ -33,6 +35,8 @@ export async function POST(request: NextRequest) {
       cc: process.env.GMAIL_USER,
       subject: 'busco.at - Anfrage',
       text: `
+				Start: ${from} 
+				Ziel: ${to} 
 				Name: ${name} 
 				Email: ${email}
 				Fahrzeug: ${vehicle} 
