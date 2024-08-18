@@ -13,10 +13,10 @@ export type ServiceCardProps = {
 
 function HorizontalCard({ post, alignment }: ServiceCardProps) {
   return (
-    <article className="grid grid-cols-2 items-start w-full bg-white rounded-2xl overflow-hidden">
+    <article className="grid md:grid-cols-2 items-start w-full bg-white rounded-2xl overflow-hidden">
       <div
-        className={`flex flex-col gap-4 w-full rounded-xl p-6 pb-10 ${
-          alignment === 'right' ? 'order-2' : 'order-1'
+        className={`flex flex-col gap-4 w-full rounded-xl p-6 pb-10 order-2 ${
+          alignment === 'right' ? 'md:order-2' : 'md:order-1'
         }`}
       >
         <div className="flex flex-wrap gap-2 pt-4">
@@ -55,8 +55,8 @@ function HorizontalCard({ post, alignment }: ServiceCardProps) {
         </div>
       </div>
       <div
-        className={`flex w-full h-full ${
-          alignment === 'right' ? 'order-1' : 'order-2'
+        className={`flex w-full h-full min-h-64 order-1 ${
+          alignment === 'right' ? 'md:order-1' : 'md:order-2'
         }`}
       >
         <div className="relative w-full h-full">

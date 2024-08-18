@@ -13,7 +13,7 @@ export default async function Index() {
     <>
       <header className="min-h-24">
         <Navigation />
-        <div className="relative py-8 px-4 min-h-screen lg:min-h-64 lg:max-h-[800px] pt-24">
+        <div className="relative py-8 px-4 lg:min-h-64 lg:max-h-[800px] pt-24">
           <Image
             src="/images/busco-hero.jpg"
             alt="busco hero section"
@@ -40,17 +40,19 @@ export default async function Index() {
               </div>
             </div>
           </div>
-          <div className="container relative z-1">
-            <div className="md:absolute z-1 -bottom-36 left-0">
+          <div className="container relative z-1 pt-8 md:pt-0">
+            <div className="md:absolute z-1 md:-bottom-36 left-0">
               <BookingFormIndex />
             </div>
           </div>
         </div>
       </header>
       <main className="py-16">
-        <div className="container mx-auto">
+        <div className="hidden md:block">
           <UI.Spacer size={'lg'} />
           <UI.Spacer size={'lg'} />
+        </div>
+        <div className="container mx-auto px-4">
           <div>
             <Image src={Shape} width={64} height={34} alt="Shape Busco" />
           </div>
@@ -65,7 +67,7 @@ export default async function Index() {
           <UI.Spacer size={'lg'} />
           <UI.Spacer size={'lg'} />
         </div>
-        <div className="text-center">
+        <div className="text-center px-4">
           <UI.Typography size={'h4'} weight={'bold'} className="text-secondary">
             Passendes Angebot für jeden Bedarf
           </UI.Typography>
@@ -74,7 +76,7 @@ export default async function Index() {
           </UI.Typography>
         </div>
         <UI.Spacer size={'lg'} />
-        <div className="container mx-auto flex flex-col md:gap-24">
+        <div className="container mx-auto px-4 flex flex-col gap-12 md:gap-24">
           {cards.map((card: PostType, index: number) => (
             <div key={index}>
               <HorizontalCard

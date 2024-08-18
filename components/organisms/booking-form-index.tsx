@@ -74,7 +74,7 @@ function BookingFormIndex() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
           {currentStep === 0 && (
-            <div className="flex gap-4 pb-2 px-6">
+            <div className="md:flex gap-4 pb-2 px-6">
               <div className="grid grid-cols-2 gap-4">
                 <Autocomplete
                   form={form}
@@ -290,16 +290,7 @@ function BookingFormIndex() {
           )}
           {/* Retunr Journey END */}
           {currentStep < 2 && (
-            <div className="flex items-center gap-8 w-full pb-6 px-6">
-              {currentStep === 0 ? (
-                <Button disabled={loading} size="lg" onClick={nextStep}>
-                  Weiter
-                </Button>
-              ) : (
-                <Button disabled={loading} size="lg" type="submit">
-                  Anfrage senden
-                </Button>
-              )}
+            <div className="flex items-center justify-between w-full pb-6 px-6">
               <UI.FormField
                 control={form.control}
                 name="returnJourney"
@@ -320,6 +311,15 @@ function BookingFormIndex() {
                   </UI.FormItem>
                 )}
               />
+              {currentStep === 0 ? (
+                <Button disabled={loading} size="lg" onClick={nextStep}>
+                  Weiter
+                </Button>
+              ) : (
+                <Button disabled={loading} size="lg" type="submit">
+                  Anfrage senden
+                </Button>
+              )}
             </div>
           )}
         </form>
