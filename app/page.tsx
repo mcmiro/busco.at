@@ -4,11 +4,20 @@ import { Navigation } from '@/components/organisms/navigation';
 import Typography from '@/components/ui/typography';
 import Image from 'next/image';
 import Shape from '@/public/elements/shape.svg';
-import cards from '@/constants/indexPage';
+import { cards, separatorOne, separatorTwo } from '@/constants/indexPage';
 import { PostType } from '@/types/Post';
 import HorizontalCard from '@/components/molecules/horizontal-card';
 
 export default async function Index() {
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/faqs`;
+  const response = await fetch(strapiUrl);
+  const faqsData = await response.json();
+
+  const faqs = faqsData?.data.map(
+    (faq: { attributes: { question: string; answer: string } }) =>
+      faq.attributes
+  );
+
   return (
     <>
       <header className="min-h-24">
@@ -41,7 +50,7 @@ export default async function Index() {
             </div>
           </div>
           <div className="container relative z-1 pt-8 md:pt-0">
-            <div className="md:absolute z-1 md:-bottom-36 left-0">
+            <div className="md:absolute z-1 md:-top-20 left-0 w-full">
               <BookingFormIndex />
             </div>
           </div>
@@ -86,6 +95,14 @@ export default async function Index() {
             </div>
           ))}
         </div>
+        <UI.Spacer size={'lg'} />
+        <UI.Separator content={separatorOne} />
+        <div className="px-4">
+          <UI.Spacer size={'lg'} />
+          {faqs.length > 0 && <UI.Faq items={faqs} />}
+        </div>
+        <UI.Spacer size={'lg'} />
+        <UI.Separator content={separatorTwo} />
       </main>
     </>
   );

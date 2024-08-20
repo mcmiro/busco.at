@@ -5,11 +5,6 @@ export type DirectionProps = 'to-airport' | 'from-airport';
 
 const useTown = () => {
   const [towns, setTowns] = useState<TownModel[]>();
-  //const [townList, setTownList] = useState<TownModel[]>();
-  //const [townInputFocus, setTownInputFocus] = useState<boolean>(false);
-  //const [selectedTown, setSelectedTown] = useState<TownModel>({
-  //  name: '',
-  //});
 
   const getTowns = async (): Promise<TownModel[]> => {
     const dbData = await fetch(
@@ -25,39 +20,12 @@ const useTown = () => {
       })
       .catch(console.error);
 
-    //setTownList(dbData);
     return dbData;
   };
-
-  //const handleSelectTown = (payload: TownModel) => {
-  //  setSelectedTown(payload);
-  //  setTownInputFocus(false);
-  //};
-
-  //const handleFocusTown = () => {
-  //  setTownInputFocus(true);
-  //};
-
-  //const autoCompleteTowns = (value: string) => {
-  //  if (!towns) return [];
-  //  setTownList(
-  //    towns.filter((town: TownModel) =>
-  //      town.name?.toLowerCase().startsWith(value?.toLowerCase())
-  //    )
-  //  );
-  //};
 
   return {
     towns,
     getTowns,
-    //townList,
-    //selectedTown,
-    //townInputFocus,
-    //setTownInputFocus,
-    //setSelectedTown,
-    //autoCompleteTowns,
-    //handleSelectTown,
-    //handleFocusTown,
   };
 };
 

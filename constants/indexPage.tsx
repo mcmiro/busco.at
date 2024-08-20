@@ -1,6 +1,7 @@
+import { SeparatorItemProps } from '@/components/molecules/separator';
 import { PostType } from '@/types/Post';
 
-const cards: PostType[] = [
+export const cards: PostType[] = [
   {
     title: 'Busvermietung ab Wien',
     content:
@@ -63,4 +64,26 @@ const cards: PostType[] = [
   },
 ];
 
-export default cards;
+export const separatorOne: SeparatorItemProps = {
+  image: { data: { attributes: { url: '/images/content/phone.jpg' } } },
+  headline: 'Attraktive Angebote für Reiseveranstalter.',
+  subline: 'Auf Ihre Bedürfnisse abgestimmt.',
+  content:
+    'Wir bieten Reiseveranstaltern attraktive Konditionen und individuell angepasste Lösungen für regelmäßige Fahrten. Senden Sie uns eifnach eine Anfrage mit Ihrem Wunsch. Wir erledigen den Rest.',
+  cta: {
+    title: 'Jetzt anfragen',
+    url: '/anfrage',
+  },
+};
+
+export const separatorTwo: SeparatorItemProps = {
+  image: { data: { attributes: { url: '/images/content/wald.jpg' } } },
+  headline: 'Von A nach Busco.',
+  subline: '',
+  content:
+    'Mieten Sie einen Charter Bus in allen Größen. Vom Mini-Van, Minibus bis zum Reisebus. Bequem, unkompliziert und für jeden Zweck.',
+  cta: {
+    title: 'Jetzt Bus mieten',
+    url: '/service/bus-mieten-wien',
+  },
+};

@@ -65,16 +65,20 @@ function BookingFormIndex() {
   }, [currentStep, form]);
 
   return (
-    <div className="text-foreground w-full bg-white rounded-2xl overflow-hidden">
+    <div className="text-foreground w-full bg-white rounded-2xl">
       <div className="pb-2 pt-6 px-6">
         <UI.Typography size="h5" weight={'bold'}>
           {steps[currentStep].title}
         </UI.Typography>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           {currentStep === 0 && (
-            <div className="md:flex gap-4 pb-2 px-6">
+            <div
+              className={`md:grid md:grid-cols-2 ${
+                bookingForm.returnJourney ? 'xl:grid-cols-4' : 'xl:grid-cols-3'
+              } gap-4 pb-2 px-6`}
+            >
               <div className="grid grid-cols-2 gap-4">
                 <Autocomplete
                   form={form}
@@ -224,7 +228,7 @@ function BookingFormIndex() {
             </div>
           )}
           {currentStep === 1 && (
-            <div className="flex flex-col gap-4 pb-6 px-6 md:px-10">
+            <div className="pb-4 px-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -280,8 +284,8 @@ function BookingFormIndex() {
             </div>
           )}
           {currentStep === 2 && (
-            <div className="flex flex-col gap-4 pb-6 px-6 md:px-10">
-              <UI.Typography className="text-center">
+            <div className="flex flex-col gap-4 pb-6 px-6">
+              <UI.Typography>
                 Wir möchten Ihnen versichern, dass wir Ihr Anliegen ernst nehmen
                 und uns bemühen, Ihnen schnellstmöglich zu antworten. Sie können
                 mit einer Rückmeldung von uns innerhalb von 48 Stunden rechnen.
