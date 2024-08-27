@@ -137,6 +137,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   };
   const breadcrumbs = { title: page.heroSection.headline, url: page.slug };
 
+  const jsonLd = page.SEO.jsonLd;
+
   return (
     <>
       {page.heroSection && (
@@ -147,6 +149,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
         />
       )}
       <main>
+        {/* JSON-LD Start */}
+        {jsonLd && (
+          <section>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: jsonLd }}
+            />
+          </section>
+        )}
+        {/* JSON-LD End */}
         <div className="container mx-auto px-4">
           {!!page?.sectionOne && (
             <>

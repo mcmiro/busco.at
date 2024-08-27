@@ -16,18 +16,15 @@ export const metadata: Metadata = {
     template: '%s - Busco',
   },
   description: 'Busco brings you everywhere!',
-  //canonical: new URL(defaultUrl),
 };
 
-//const isPdpPage = window.location.pathname;
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html lang="de">
       <body className={urbanist.className}>
         {children}
         <UI.Footer />

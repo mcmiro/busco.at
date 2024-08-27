@@ -1,6 +1,7 @@
 import { UI } from '../index';
 import Link from 'next/link';
 import Logo from '../ui/logo';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -91,6 +92,28 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row justify-between gap-8 mt-8">
+        <div className="order-2 md:order-1">
+          © 2024 Busco - alle Rechte vorbehalten
+        </div>
+        <div className="flex gap-4 order-1 md:order-2">
+          <Link
+            href="https://www.linkedin.com/company/busco-vienna/about/"
+            target="blank"
+          >
+            <Linkedin />
+          </Link>
+          <Link href="https://www.instagram.com/busco_vienna/" target="blank">
+            <Instagram />
+          </Link>
+          <Link
+            href="https://www.facebook.com/people/Busco-Vienna/61565109265240/"
+            target="blank"
+          >
+            <Facebook />
+          </Link>
         </div>
       </div>
     </footer>
