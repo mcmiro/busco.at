@@ -94,7 +94,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between gap-8 mt-8">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between gap-8 mt-8">
         <div className="order-2 md:order-1">
           © 2024 Busco - alle Rechte vorbehalten
         </div>
