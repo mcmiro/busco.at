@@ -1,4 +1,4 @@
-import { PostType } from '@/types/Post';
+import { HorizontalCardType } from '@/types/Post';
 import Image from 'next/image';
 import { UI } from '../index';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 export type Alignment = 'left' | 'right';
 
 export type ServiceCardProps = {
-  post: PostType;
+  post: HorizontalCardType;
   alignment?: Alignment;
 };
 

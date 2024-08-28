@@ -4,7 +4,7 @@ import { Navigation } from '@/components/organisms/navigation';
 import Typography from '@/components/ui/typography';
 import Image from 'next/image';
 import Shape from '@/public/elements/shape.svg';
-import { PostType } from '@/types/Post';
+import { HorizontalCardType } from '@/types/Post';
 import HorizontalCard from '@/components/molecules/horizontal-card';
 import { Metadata } from 'next';
 import { homeQueryParams } from '@/lib/strapi-queries';
@@ -120,7 +120,7 @@ export default async function Index() {
         </div>
         <UI.Spacer size={'lg'} />
         <div className="container mx-auto px-4 flex flex-col gap-12 md:gap-24">
-          {horizontalCards.map((card: PostType, index: number) => (
+          {horizontalCards.map((card: HorizontalCardType, index: number) => (
             <div key={index}>
               <HorizontalCard
                 post={card}

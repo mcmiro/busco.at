@@ -11,6 +11,14 @@ export type PostType = {
   content: string;
   image: string;
   tags?: string[];
+  href: string;
+};
+
+export type HorizontalCardType = {
+  title: string;
+  content: string;
+  image: string;
+  tags?: string[];
   cta: {
     title: string;
     url: string;
