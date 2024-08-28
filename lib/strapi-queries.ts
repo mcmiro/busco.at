@@ -24,3 +24,18 @@ export const pdpQueryParams = {
   'populate[22]': 'tags',
   'populate[23]': 'tags.tag',
 };
+
+export const homeQueryParams = {
+  'populate[0]': 'SEO',
+  'populate[1]': 'heroSection',
+  'populate[2]': 'intro',
+  'populate[3]': 'sectionTwo',
+  'populate[4]': 'cards',
+  'populate[5]': 'cards.image',
+  'populate[6]': 'cards.tags',
+  'populate[7]': 'cards.cta',
+  'populate[8]': 'separatorOne.cta',
+  'populate[9]': 'separatorOne.image',
+  'populate[10]': 'separatorTwo.cta',
+  'populate[11]': 'separatorTwo.image',
+};

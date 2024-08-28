@@ -11,5 +11,8 @@ export type PostType = {
   content: string;
   image: string;
   tags?: string[];
-  href: string;
+  cta: {
+    title: string;
+    url: string;
+  };
 };

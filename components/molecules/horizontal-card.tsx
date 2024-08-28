@@ -46,10 +46,10 @@ function HorizontalCard({ post, alignment }: ServiceCardProps) {
         </div>
         <div className="mt-16">
           <Link
-            href={post.href}
+            href={post.cta.url}
             className="inline-flex gap-4 bg-black rounded-lg px-6 py-3 text-white font-semibold"
           >
-            Angebot generieren
+            {post.cta.title}
             <ArrowRight />
           </Link>
         </div>

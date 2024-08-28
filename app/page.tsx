@@ -4,14 +4,51 @@ import { Navigation } from '@/components/organisms/navigation';
 import Typography from '@/components/ui/typography';
 import Image from 'next/image';
 import Shape from '@/public/elements/shape.svg';
-import { cards, separatorOne, separatorTwo } from '@/constants/indexPage';
 import { PostType } from '@/types/Post';
 import HorizontalCard from '@/components/molecules/horizontal-card';
+import { Metadata } from 'next';
+import { homeQueryParams } from '@/lib/strapi-queries';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/home-page?populate=*`;
+  const response = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
+
+  const { data } = await response.json();
+  const metaData = data.attributes.seo;
+  return {
+    title: metaData.title,
+    description: metaData.description,
+  };
+}
 
 export default async function Index() {
-  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/faqs`;
-  const response = await fetch(strapiUrl);
-  const faqsData = await response.json();
+  // Page Data
+  const urlParams = new URLSearchParams(homeQueryParams);
+  const strapiUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/home-page?${urlParams}`;
+  const response = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
+
+  const { data } = await response.json();
+  const { heroSection, intro, sectionTwo, cards, separatorOne, separatorTwo } =
+    data.attributes;
+
+  const horizontalCards = cards.map((card: any) => {
+    return {
+      title: card.title,
+      content: card.content,
+      tags: card.tags.map((item: any) => item.tag),
+      cta: card.cta,
+      image: card.image.data.attributes.url,
+    };
+  });
+
+  // FAQs
+  const strapiFaqUrl = `${process.env.NEXT_APOLLO_CLIENT_URL}/api/faqs`;
+  const responseFaq = await fetch(strapiFaqUrl);
+  const faqsData = await responseFaq.json();
 
   const faqs = faqsData?.data.map(
     (faq: { attributes: { question: string; answer: string } }) =>
@@ -35,7 +72,7 @@ export default async function Index() {
             <div className="flex flex-col gap-12 lg:gap-24">
               <div>
                 <Typography textColor="white" size="h4">
-                  Preis berechnen und Busangebot in Rekordzeit erhalten
+                  {heroSection.content}
                 </Typography>
                 <Typography
                   type="h1"
@@ -43,8 +80,7 @@ export default async function Index() {
                   size="h2"
                   weight={'semibold'}
                 >
-                  Bus für Ihre<br></br>
-                  nächste Reise finden.
+                  {heroSection.headline}
                 </Typography>
               </div>
             </div>
@@ -67,10 +103,8 @@ export default async function Index() {
           </div>
           <UI.HeadlineContent
             content={{
-              headline:
-                'Bus finden und Angebot in 24h erhalten. Einfach und transparent.',
-              content:
-                'Idealer Bus war noch nie so einfach zu finden. Bei Busco haben wir den Buchungsprozess optimiert, damit Sie sich entspannt auf Ihre Reise freuen können. Wir bieten maßgeschneiderte Lösungen für jede Gruppengröße und jeden Anlass – zu klaren Preisen ohne versteckte Kosten. Überlassen Sie uns den Rest und genießen Sie Ihre Fahrt.',
+              headline: intro.headline,
+              content: intro.content,
             }}
           />
           <UI.Spacer size={'lg'} />
@@ -78,15 +112,15 @@ export default async function Index() {
         </div>
         <div className="text-center px-4">
           <UI.Typography size={'h4'} weight={'bold'} className="text-secondary">
-            Passendes Angebot für jeden Bedarf
+            {sectionTwo.content}
           </UI.Typography>
           <UI.Typography size={'h3'} weight={'bold'}>
-            Bei Busco finden Sie einen Bus für jede Reisegruppe.
+            {sectionTwo.headline}
           </UI.Typography>
         </div>
         <UI.Spacer size={'lg'} />
         <div className="container mx-auto px-4 flex flex-col gap-12 md:gap-24">
-          {cards.map((card: PostType, index: number) => (
+          {horizontalCards.map((card: PostType, index: number) => (
             <div key={index}>
               <HorizontalCard
                 post={card}
