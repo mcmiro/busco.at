@@ -20,13 +20,15 @@ function HeroSection({ content, breadCrumbs, priceInfo }: HeroProps) {
   ];
   return (
     <div className="relative py-8 px-4 min-h-screen lg:min-h-64 lg:max-h-[800px]">
-      <Image
-        src={content.image.data.attributes.url}
-        alt="busco bus"
-        layout="fill"
-        objectFit="cover"
-        className="absolute top-0 left-0 z-0"
-      />
+      {content?.image && (
+        <Image
+          src={content.image.data?.attributes?.url}
+          alt="busco bus"
+          layout="fill"
+          objectFit="cover"
+          className="absolute top-0 left-0 z-0"
+        />
+      )}
       <div className="lg:grid lg:grid-cols-2 justify-between text-white relative z-20 container mx-auto h-full md:py-16">
         <div className="flex flex-col gap-12 lg:gap-24">
           <UI.Breadcrumbs items={breadcrumbs} />

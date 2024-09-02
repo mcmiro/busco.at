@@ -102,7 +102,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       const cardContent = {
         title: pdp.attributes.heroSection?.headline,
         content: pdp.attributes.cardDescription,
-        image: pdp.attributes.heroSection.image.data.attributes.url,
+        image: pdp.attributes.heroSection.image?.data?.attributes.url,
         href: pdp.attributes.slug,
         tags: pdp.attributes.tags.map((tag: any) => tag.tag),
       };
