@@ -1,6 +1,5 @@
 import React from 'react';
 import { UI } from '@/components/index';
-import router from 'next/router';
 import Link from 'next/link';
 
 function Page() {
