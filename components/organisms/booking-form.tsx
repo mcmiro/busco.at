@@ -26,6 +26,8 @@ import { RouteType } from '@/types/RouteType';
 import { Textarea } from '../ui/textarea';
 import steps from '@/lib/booking-form-steps';
 import Autocomplete from '../molecules/autocomplete';
+import { Checkbox } from '../ui/checkbox';
+import Link from 'next/link';
 
 export type BookingFormProps = {
   priceInfo?: { prices: { attributes: PriceItemType }[]; routeInfo: RouteType };
@@ -85,7 +87,7 @@ function BookingForm({ priceInfo }: BookingFormProps) {
     if (currentStep === 1) {
       // rendering fix to clear all errors
       setTimeout(() => {
-        form.clearErrors(['name', 'email', 'message']);
+        form.clearErrors(['name', 'email', 'message', 'terms']);
       }, 0);
     }
   }, [currentStep, form]);
@@ -324,6 +326,35 @@ function BookingForm({ priceInfo }: BookingFormProps) {
                           disabled={loading}
                         />
                       </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className="flex gap-2 w-full mt-4">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="text-xs font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 !mt-0 cursor-pointer">
+                        Ich habe die{' '}
+                        <Link
+                          href="/datenschutz"
+                          className="underline"
+                          target="blank"
+                        >
+                          Datenschutzerklärung
+                        </Link>{' '}
+                        und die{' '}
+                        <Link href="/agb" className="underline" target="blank">
+                          AGBs
+                        </Link>{' '}
+                        gelesen und stimme diesen zu.
+                      </FormLabel>
                     </FormItem>
                   )}
                 />

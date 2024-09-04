@@ -8,6 +8,7 @@ const defaultValues = {
   returnJourney: false,
   returnDate: '',
   returnTime: '',
+  terms: false,
 };
 
 export default defaultValues;

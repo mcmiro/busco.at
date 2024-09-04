@@ -22,6 +22,8 @@ import vehicles from '@/constants/vehicles';
 import { Textarea } from '../ui/textarea';
 import steps from '@/lib/booking-form-steps';
 import Autocomplete from '../molecules/autocomplete';
+import { Checkbox } from '../ui/checkbox';
+import Link from 'next/link';
 
 function BookingFormIndex() {
   const form = useForm<BookingFormValues>({
@@ -294,27 +296,58 @@ function BookingFormIndex() {
           )}
           {/* Retunr Journey END */}
           {currentStep < 2 && (
-            <div className="flex items-center justify-between w-full pb-6 px-6">
-              <UI.FormField
-                control={form.control}
-                name="returnJourney"
-                render={({ field }) => (
-                  <UI.FormItem>
-                    <div className="space-y-0.5">
-                      <UI.FormLabel className="cursor-pointer">
-                        Rückfahrt
-                      </UI.FormLabel>
-                    </div>
-                    <UI.FormControl>
-                      <UI.Switch
-                        className="!mt-1"
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </UI.FormControl>
-                  </UI.FormItem>
-                )}
-              />
+            <div className="flex gap-4 items-center justify-between w-full pb-6 px-6">
+              <div>
+                <UI.FormField
+                  control={form.control}
+                  name="returnJourney"
+                  render={({ field }) => (
+                    <UI.FormItem>
+                      <div className="space-y-0.5">
+                        <UI.FormLabel className="cursor-pointer">
+                          Rückfahrt
+                        </UI.FormLabel>
+                      </div>
+                      <UI.FormControl>
+                        <UI.Switch
+                          className="!mt-1"
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </UI.FormControl>
+                    </UI.FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className="flex gap-2 w-full mt-2">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="text-xs font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 !mt-0 cursor-pointer">
+                        Ich habe die{' '}
+                        <Link
+                          href="/datenschutz"
+                          className="underline"
+                          target="blank"
+                        >
+                          Datenschutzerklärung
+                        </Link>{' '}
+                        und die{' '}
+                        <Link href="/agb" className="underline" target="blank">
+                          AGBs
+                        </Link>{' '}
+                        gelesen und stimme diesen zu.
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+              </div>
               {currentStep === 0 ? (
                 <Button disabled={loading} size="lg" onClick={nextStep}>
                   Weiter

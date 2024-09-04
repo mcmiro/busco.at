@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button';
 import { RequestFormValues, formSchema } from '@/lib/request-form-schema';
 import defaultValues from '@/lib/default-request-form-values';
 import { Textarea } from '../ui/textarea';
+import { Checkbox } from '../ui/checkbox';
+import Link from 'next/link';
 
 function RequestForm() {
   const form = useForm<RequestFormValues>({
@@ -88,6 +90,35 @@ function RequestForm() {
                   <FormControl>
                     <Textarea {...field} />
                   </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="terms"
+              render={({ field }) => (
+                <FormItem className="flex gap-2 w-full mt-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormLabel className="text-xs font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 !mt-0 cursor-pointer">
+                    Ich habe die{' '}
+                    <Link
+                      href="/datenschutz"
+                      className="underline"
+                      target="blank"
+                    >
+                      Datenschutzerklärung
+                    </Link>{' '}
+                    und die{' '}
+                    <Link href="/agb" className="underline" target="blank">
+                      AGBs
+                    </Link>{' '}
+                    gelesen und stimme diesen zu.
+                  </FormLabel>
                 </FormItem>
               )}
             />

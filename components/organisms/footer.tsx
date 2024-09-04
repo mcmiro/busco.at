@@ -2,24 +2,19 @@ import { UI } from '../index';
 import Link from 'next/link';
 import Logo from '../ui/logo';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import CookieBanner from './cookie-banner';
+import CtaCookies from '../molecules/cta-cookies';
 
 export default function Footer() {
   return (
     <footer className="bg-gray-100 py-6 px-4">
+      <CookieBanner />
       <div className="grid md:grid-cols-2 gap-8 container mx-auto bg-white rounded-xl p-4 md:p-8">
         <div>
           <div className="h-[32px]">
             <Logo />
           </div>
           <ul className="flex flex-col gap-2 text-lg mt-4">
-            <li>
-              <Link
-                className="hover:md:underline hover:md:text-gray-500"
-                href="/ueber-busco"
-              >
-                Über Busco
-              </Link>
-            </li>
             <li>
               <Link
                 className="hover:md:underline hover:md:text-gray-500"
@@ -51,6 +46,9 @@ export default function Footer() {
               >
                 AGB
               </Link>
+            </li>
+            <li>
+              <CtaCookies />
             </li>
           </ul>
         </div>

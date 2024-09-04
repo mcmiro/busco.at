@@ -43,6 +43,9 @@ export const formSchema = z.object({
       },
       { message: 'Uhrzeit ist Pflichtfeld' }
     ),
+  terms: z.boolean().refine((value) => value === true, {
+    message: 'Sie müssen den Bedingungen zustimmen',
+  }),
 });
 
 export type BookingFormValues = z.infer<typeof formSchema>;

@@ -1,34 +1,46 @@
-'use client';
 import { remark } from 'remark';
 import html from 'remark-html';
 import { UI } from '@/components/index';
 import RequestForm from '@/components/organisms/request-form';
 import '@/app/assets/styles/markdown.css';
-import { useEffect, useState } from 'react';
+import { Metadata } from 'next';
 
-export default function Page() {
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<any>();
+export async function generateMetadata(): Promise<Metadata> {
+  const strapiUrl = `${process.env.NEXT_PUBLIC_APOLLO_CLIENT_URL}/api/partner-page?populate[0]=seo&populate[1]=seo.ogImage`;
+  const pageData = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      const strapiUrl = `${process.env.NEXT_PUBLIC_APOLLO_CLIENT_URL}/api/partner-page?populate=*`;
-      const response = await fetch(strapiUrl, {
-        next: { revalidate: 10 },
-      });
+  const data = await pageData.json();
+  const metaData = data?.data?.attributes.seo;
+  const ogImage = metaData?.ogImage?.data?.attributes.url;
 
-      const { data } = await response.json();
-      const pageData = data.attributes;
-      setTitle(pageData.title);
-      const processedContent = await remark()
-        .use(html)
-        .process(pageData.content);
-      const contentHtml = processedContent.toString();
-      setContent(contentHtml);
-    };
+  return {
+    title: metaData?.title,
+    description: metaData?.description,
+    alternates: {
+      canonical: `./`,
+    },
+    openGraph: {
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+  };
+}
 
-    fetchContent();
-  }, []);
+export default async function Page() {
+  const strapiUrl = `${process.env.NEXT_PUBLIC_APOLLO_CLIENT_URL}/api/partner-page?populate=*`;
+  const response = await fetch(strapiUrl, {
+    next: { revalidate: 10 },
+  });
+
+  const { data } = await response.json();
+  const pageData = data.attributes;
+  const processedContent = await remark().use(html).process(pageData.content);
+  const contentHtml = processedContent.toString();
 
   return (
     <>
@@ -42,11 +54,11 @@ export default function Page() {
           weight="bold"
           className="text-center"
         >
-          {title}
+          {pageData.title}
         </UI.Typography>
-        {content && (
+        {contentHtml && (
           <div
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
             className="pb-2 pt-4 markdown"
           />
         )}
