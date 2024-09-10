@@ -278,7 +278,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {faqs.length > 0 && <UI.Faq items={faqs} />}
         </div>
         <UI.Spacer size={'lg'} />
-        {!!page.otherBuses && <UI.RelatedLinks content={page.otherBuses} />}
+        {/*{!!page.otherBuses && <UI.RelatedLinks content={page.otherBuses} />}*/}
       </main>
     </>
   );
