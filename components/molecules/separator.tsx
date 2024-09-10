@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export type SeparatorItemProps = {
-  image: { data: { attributes: { url: string } } };
+  image: { data: { attributes: { url: string; alternativeText?: string } } };
   headline: string;
   subline: string;
   content: string;
@@ -22,7 +22,11 @@ function Separator({ content }: SeparatorProps) {
       {!!content?.image.data && (
         <Image
           src={content?.image.data.attributes.url}
-          alt="busco Ausflug"
+          alt={
+            content?.image.data.attributes.alternativeText
+              ? content?.image.data.attributes.alternativeText
+              : 'busco Ausflug'
+          }
           layout="fill"
           objectFit="cover"
           className="absolute top-0 left-0 z-0"
