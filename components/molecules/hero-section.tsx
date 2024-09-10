@@ -18,12 +18,17 @@ function HeroSection({ content, breadCrumbs, priceInfo }: HeroProps) {
     { title: 'Service', url: '/service' },
     { title: breadCrumbs.title, url: breadCrumbs.url },
   ];
+
   return (
     <div className="relative py-8 px-4 min-h-screen lg:min-h-64 lg:max-h-[800px]">
       {content?.image && (
         <Image
           src={content.image.data?.attributes?.url}
-          alt="busco bus"
+          alt={
+            content.image.data?.attributes?.alternativeText
+              ? content.image.data?.attributes?.alternativeText
+              : 'busco Bus'
+          }
           layout="fill"
           objectFit="cover"
           className="absolute top-0 left-0 z-0"

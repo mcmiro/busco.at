@@ -12,6 +12,7 @@ export type ImageItem = {
   data: {
     attributes: {
       url: string;
+      alternativeText?: string;
     };
   };
 };

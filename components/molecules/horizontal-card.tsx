@@ -62,7 +62,7 @@ function HorizontalCard({ post, alignment }: ServiceCardProps) {
         <div className="relative w-full h-full">
           <Image
             src={post.image}
-            alt={post.title}
+            alt={post.imageAlt ? post.imageAlt : post.title}
             fill
             layout="cover"
             className="w-full rounded-2xl bg-gray-100 object-cover"

@@ -77,7 +77,7 @@ function ServiceCard({ post }: ServiceCardProps) {
       <div className="relative w-full aspect-square -mt-6">
         <Image
           src={post.image}
-          alt={post.title}
+          alt={post.imageAlt ? post.imageAlt : post.title}
           fill
           layout="cover"
           className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"

@@ -42,6 +42,7 @@ export default async function Index() {
       tags: card.tags.map((item: any) => item.tag),
       cta: card.cta,
       image: card.image.data.attributes.url,
+      imageAlt: card.image.data.attributes.alternativeText,
     };
   });
 
@@ -62,7 +63,7 @@ export default async function Index() {
         <div className="relative py-8 px-4 lg:min-h-64 lg:max-h-[800px] pt-24">
           <Image
             src="/images/busco-hero.jpg"
-            alt="busco hero section"
+            alt="Bus finden mit Busco"
             layout="fill"
             objectFit="cover"
             objectPosition="bottom left"

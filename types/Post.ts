@@ -10,6 +10,7 @@ export type PostType = {
   title: string;
   content: string;
   image: string;
+  imageAlt?: string;
   tags?: string[];
   href: string;
 };
@@ -18,6 +19,7 @@ export type HorizontalCardType = {
   title: string;
   content: string;
   image: string;
+  imageAlt?: string;
   tags?: string[];
   cta: {
     title: string;

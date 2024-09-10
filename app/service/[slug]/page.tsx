@@ -103,6 +103,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
         title: pdp.attributes.heroSection?.headline,
         content: pdp.attributes.cardDescription,
         image: pdp.attributes.heroSection.image?.data?.attributes.url,
+        imageAlt:
+          pdp.attributes.heroSection.image?.data?.attributes.alternativeText,
         href: pdp.attributes.slug,
         tags: pdp.attributes.tags.map((tag: any) => tag.tag),
       };
@@ -121,6 +123,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
         title: pdp.attributes.heroSection?.headline,
         content: pdp.attributes.cardDescription,
         image: pdp.attributes.heroSection.image.data.attributes.url,
+        imageAlt:
+          pdp.attributes.heroSection.image?.data?.attributes.alternativeText,
         href: pdp.attributes.slug,
         tags: pdp.attributes.tags.map((tag: any) => tag.tag),
       };
