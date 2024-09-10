@@ -13,7 +13,7 @@ const CookieConsent = () => {
   } = useCookieConsent();
 
   return (
-    <div className="fixed z-50 w-full p-8 bottom-0">
+    <div className="fixed z-50 w-full p-8 bottom-0 left-0">
       <div className="container mx-auto px-4 border border-foreground bg-white py-8 relative rounded-xl">
         <UI.Button
           onClick={handleCloseSettings}
